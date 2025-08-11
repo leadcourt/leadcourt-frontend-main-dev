@@ -555,6 +555,7 @@ export default function DataTablePage() {
                   dataKey="row_id"
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
+                  // scrollHeight="400px" 
                   scrollHeight="80vh" 
                   // paginator
                   className=" text-sm rounded-lg overflow-hidden"
