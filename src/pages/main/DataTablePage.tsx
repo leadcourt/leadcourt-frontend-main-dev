@@ -417,7 +417,7 @@ export default function DataTablePage() {
       </Dialog>
       <div className=" grid grid-cols-12 pt3 overflow-hidden">
         {/* The filter section */}
-        <div className=" col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 maxh-[100vh] overflow-y-auto overflow-x-hidden static">
+        <div className="lg:border-r border-r-gray-3fix00 lg:mr-1 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 max-h-[90vh] overflow-y-auto overflow-x-hidden static">
           {/* {keyFilters.Designation} */}
           <h2 className="font-bold col-span-12 text-2xl text-gray-600">
             Filters
@@ -555,9 +555,9 @@ export default function DataTablePage() {
                   dataKey="row_id"
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
-                  scrollHeight="400px" 
+                  scrollHeight="80vh" 
                   // paginator
-                  className="text-sm rounded-lg overflow-hidden"
+                  className=" text-sm rounded-lg overflow-hidden"
                   rows={50}
                   selectionMode={rowClick ? null : "checkbox"}
                   onSelectionChange={(e: any) => setSelectedProfile(e.value)}

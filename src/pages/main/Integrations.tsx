@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { checkHubspotConnection, connectionHubspotCRM } from '../../utils/api/crmIntegrations';
+import { checkHubspotConnection, checkZohoConnection, connectionHubspotCRM } from '../../utils/api/crmIntegrations';
 import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
 import hubspotLogo from "../../assets/integrations/hubspot/HubSpot.png";
@@ -105,8 +105,25 @@ const Integrations = () => {
     })
   }
 
+  const zohoConnection = async () => {
+    setConnections({...connections, 'Zoho': 'checking' })
+    console.log('Checking Zoho connection...');
+    
+    await checkZohoConnection().then((response) => {
+    console.log('response', response)
+      const updatedConnection = {...connections, 'Zoho': response.data }
+      console.log('Zoho connection status:', response.data);
+      setConnections(updatedConnection);
+
+      // Handle the response as needed
+    }).catch(( ) => {
+      // Handle the error as needed
+    })
+  }
+
   useEffect(() => {
     hubspotConnection()
+    zohoConnection()
   }, []);
   return (
     <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">

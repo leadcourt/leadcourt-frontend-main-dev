@@ -28,6 +28,7 @@ import Collab_Integrations from '../pages/collaboratorMain/Integrations';
 import Collab_IntegrationCallback from '../pages/collaboratorMain/IntegrationCallback';
 import VerifyEmail from '../pages/auth/VerifyEmail';
 import AuthLayout from './layouts/AuthLayout';
+import IntegrationZohoCallback from '../pages/main/IntegrationZohoCallback';
 // import LeadCourtCredits2 from '../pages/main/BuyCredit2';
 
 // Create the router configuration
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: '/integrations/hubspot/callback',
         element: <IntegrationCallback />
+      }, 
+      {
+        path: '/integrations/zoho/callback',
+        element: <IntegrationZohoCallback />
       }, 
       {
         path: '/user/setting',

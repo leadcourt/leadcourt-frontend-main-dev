@@ -77,7 +77,7 @@ export default function Collab_ListPage() {
       ) : existingList.length ? (
       // ) : allListDisplay.length ? (
         
-      <div className="p-10">
+      <div className="p-10 border border-gray-200 ">
       <div className="p-5 my-5 rounded-2xl text-gray-500 bg-gray-50">
         <p>You have {existingList.length} list<span>{existingList.length > 1 ? 's': ''}</span> created</p>
       </div>
@@ -105,7 +105,7 @@ export default function Collab_ListPage() {
                 </p>
                 <p>
                   <span className="text-gray-400 uppercase text-xs font-bold">
-                    Profiles :
+                    Contacts :
                   </span>{" "}
                   <span>{item?.total}</span>
                 </p>

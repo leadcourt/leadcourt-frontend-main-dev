@@ -210,7 +210,7 @@ export default function ListPage() {
             {existingList?.map((item: any, index: any) => (
               <div
                 key={index}
-                className=" cursor-pointer transition-all ease-in-out duration-300 shadow-2xl shadow-gray-200 bg-gray-50 hover:bg-red-50  rounded-lg"
+                className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 shadow2xl shadow-gray-200 bg-gray-50 hover:bg-red-50  rounded-lg"
               >
                 <div className="flex h-fit items-center justify-between">
                   <div
@@ -228,7 +228,7 @@ export default function ListPage() {
                     </p>
                     <p>
                       <span className="text-gray-400 uppercase text-xs font-bold">
-                        Profiles :
+                    Contacts :
                       </span>{" "}
                       <span>{item?.total}</span>
                     </p>
