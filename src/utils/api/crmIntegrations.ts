@@ -30,6 +30,7 @@ const checkZohoConnection = async () => {
 const connectionZohoCRM = 'https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id={client_id}&response_type=code&access_type={"offline"or"online"}&redirect_uri={redirect_uri}'
 
 
+
 export {
     checkHubspotConnection,
     postHubspotCRMCode,
