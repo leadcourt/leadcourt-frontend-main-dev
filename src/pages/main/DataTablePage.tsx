@@ -419,7 +419,7 @@ export default function DataTablePage() {
         {/* The filter section */}
         <div className="h-[90vh] lg:border-r border-r-gray-300 lg:mr-1 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 max-h-[90vh] overflow-y-auto overflow-x-hidden static">
           {/* {keyFilters.Designation} */}
-          <h2 className="font-bold mb-5 col-span-12 text-2xl text-gray-600">
+          <h2 className="font-bold mb-4 col-span-12 text-2xl text-gray-600">
             Filters
           </h2>
 
