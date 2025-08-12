@@ -490,6 +490,8 @@ export default function DataTablePage() {
                   globalFilterFields={fields}
                   tableStyle={{ minWidth: "100%" }}
                   dataKey="row_id"
+                  scrollable 
+                  scrollHeight="70vh" 
                   // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}
@@ -556,7 +558,7 @@ export default function DataTablePage() {
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
                   // scrollHeight="400px" 
-                  scrollHeight="80vh" 
+                  scrollHeight="70vh" 
                   // paginator
                   className=" text-sm rounded-lg overflow-hidden"
                   rows={50}
