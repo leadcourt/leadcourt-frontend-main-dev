@@ -27,7 +27,7 @@ const checkZohoConnection = async () => {
     return await axios.get(`${baseUrl}/integrations/zoho/check`, )
 }
 
-const connectionZohoCRM = 'https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id={client_id}&response_type=code&access_type={"offline"or"online"}&redirect_uri={redirect_uri}'
+const connectionZohoCRM = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id=${import.meta.env.VITE_BE_URL}&response_type=code&access_type={"offline"or"online"}&redirect_uri={redirect_uri}`
 
 
 
