@@ -367,7 +367,7 @@ export default function Collab_DataTablePage() {
   }, []);
 
   return (
-    <div className="lg:h-[90vh] border border-red-500">
+    <div className="lg:h-[90vh]">
       <Dialog
         header={`Insufficient Credits`}
         visible={visible}
@@ -403,11 +403,11 @@ export default function Collab_DataTablePage() {
           </div>
         </div>
       </Dialog>
-      <div className="grid grid-cols-12 pt-3 overflow-hidden">
+      <div className="grid grid-cols-12 overflow-hidden">
         {/* The filter section */}
-        <div className=" col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 maxh-[100vh] overflow-y-auto overflow-x-hidden static">
+        <div className=" border-r border-r-gray-200 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 maxh-[100vh] overflow-y-auto overflow-x-hidden static">
           {/* {keyFilters.Designation} */}
-          <h2 className="font-bold col-span-12 text-2xl text-gray-600">
+          <h2 className="font-bold col-span-12 mb-5 text-2xl text-gray-600">
             Filters
           </h2>
 
@@ -419,7 +419,7 @@ export default function Collab_DataTablePage() {
         </div>
 
         {/* The table section */}
-        <div className="col-span-12 lg:col-span-9">
+        <div className="ml-5 col-span-12 lg:col-span-9">
           <div className="card ">
             <div className="max-w-[100vw] flex flex-col-reverse lg:flex-row gap-5 lg: items-center justify-between p-2">
               {/* Global filter */}
@@ -478,6 +478,8 @@ export default function Collab_DataTablePage() {
                   globalFilterFields={fields}
                   tableStyle={{ minWidth: "100%" }}
                   dataKey="row_id"
+                  scrollable 
+                  scrollHeight="70vh" 
                   // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}
@@ -543,7 +545,7 @@ export default function Collab_DataTablePage() {
                   dataKey="row_id"
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
-                  scrollHeight="400px" 
+                  scrollHeight="70vh" 
                   // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}

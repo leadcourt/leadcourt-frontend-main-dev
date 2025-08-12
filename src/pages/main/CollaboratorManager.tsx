@@ -10,7 +10,7 @@ import {
   Crown,
   Eye,
   Edit3,
-  Trash2,
+  // Trash2,
   Search,
 } from "lucide-react";
 import { Dialog } from "primereact/dialog";
@@ -93,11 +93,11 @@ const CollaboratorManager: React.FC = () => {
     setEditingRole(null);
   };
 
-  const handleRemoveCollaborator = (collaboratorId: string) => {
-    setCollaborators(
-      collaborators?.filter((collab) => collab.id !== collaboratorId)
-    );
-  };
+  // const handleRemoveCollaborator = (collaboratorId: string) => {
+  //   setCollaborators(
+  //     collaborators?.filter((collab) => collab.id !== collaboratorId)
+  //   );
+  // };
 
   const handleBulkAction = (action: "remove" | "resend") => {
     if (action === "remove") {
@@ -506,7 +506,7 @@ const CollaboratorManager: React.FC = () => {
                     <td className="py-4 px-4">
                       {collaborator.role !== "owner" && (
                         <div className="flex items-center gap-2">
-                          <button
+                          {/* <button
                             onClick={() =>
                               handleRemoveCollaborator(collaborator.id)
                             }
@@ -514,7 +514,7 @@ const CollaboratorManager: React.FC = () => {
                             title="Remove collaborator"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button>
+                          </button> */}
                           <button className="text-gray-400 hover:text-gray-600 p-1 rounded transition-colors">
                             <MoreHorizontal className="w-4 h-4" />
                           </button>

@@ -415,7 +415,7 @@ export default function DataTablePage() {
           </div>
         </div>
       </Dialog>
-      <div className="grid grid-cols-12 pt3 overflow-hidden">
+      <div className="grid grid-cols-12 overflow-hidden">
         {/* The filter section */}
         <div className="h-[90vh] lg:border-r border-r-gray-300 lg:mr-1 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 max-h-[90vh] overflow-y-auto overflow-x-hidden static">
           {/* {keyFilters.Designation} */}
@@ -431,7 +431,7 @@ export default function DataTablePage() {
         </div>
 
         {/* The table section */}
-        <div className="col-span-12 lg:col-span-9">
+        <div className="ml-5 col-span-12 lg:col-span-9">
           <div className="card ">
             <div className="max-w-[100vw] flex flex-col-reverse lg:flex-row gap-5 lg: items-center justify-between p-2">
               {/* Global filter */}

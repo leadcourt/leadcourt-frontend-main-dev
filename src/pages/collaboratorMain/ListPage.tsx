@@ -89,7 +89,9 @@ export default function Collab_ListPage() {
               // navigate(`/list/${item.name.replace(/\s+/g, "-")}/details`)
               navigate(`/collaboration/${collabProject?._id}/list/${item?.name}/details`)
             }
-                className="border border-gray-200  cursor-pointer transition-all ease-in-out duration-300 shadow2xl shadow-gray-200 bg-gray-50 hover:bg-red-50  rounded-lg"
+                            // className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-200 hover:bg-gray-300  rounded-lg"
+
+                  className="border-2 border-gray-200  cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-100  rounded-lg"
             // className="p-5 hover:p-[1.3rem] cursor-pointer transition-transform ease-in-out border bg-red-50 hover:bg-red-100 border-red-100 rounded-lg"
           >
             <div className="flex items-center justify-between">

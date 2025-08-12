@@ -206,11 +206,12 @@ export default function ListPage() {
               <span>{existingList?.length > 1 ? "s" : ""}</span> created
             </p>
           </div>
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {existingList?.map((item: any, index: any) => (
               <div
                 key={index}
-                className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 shadow2xl shadow-gray-200 bg-gray-50 hover:bg-red-50  rounded-lg"
+                  className="border2 border-gray-200  cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-100  rounded-lg"
+                // className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 shadow2xl shadow-gray-200 bg-gray-200 hover:bg-red-50  rounded-lg"
               >
                 <div className="flex h-fit items-center justify-between">
                   <div
@@ -218,7 +219,7 @@ export default function ListPage() {
                       // navigate(`/list/${item.name.replace(/\s+/g, "-")}/details`)
                       navigate(`/list/${item?.name}/details`)
                     }
-                    className="border-dashed border-r-2 border-r-gray-200 hover:p-[1.3rem] p-5 w-[75%]"
+                    className="border-dashed border-r-2 border-r-gray-50 hover:p-[1.3rem] p-5 w-[75%]"
                   >
                     <p>
                       <span className="text-gray-400 uppercase text-sm font-bold">
