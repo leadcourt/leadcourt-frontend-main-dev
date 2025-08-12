@@ -27,7 +27,10 @@ const checkZohoConnection = async () => {
     return await axios.get(`${baseUrl}/integrations/zoho/check`, )
 }
 
-const connectionZohoCRM = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id=${import.meta.env.VITE_BE_URL}&response_type=code&access_type={"offline"or"online"}&redirect_uri={redirect_uri}`
+// const connectionZohoCRM = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id=${import.meta.env.VITE_BE_URL}&response_type=code&access_type={"offline"or"online"}&redirect_uri={redirect_uri}`
+console.log(`client_id=${import.meta.env.VITE_ZOHO_CLIENT_ID}`);
+const connectionZohoCRM = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL&client_id=${import.meta.env.VITE_ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${import.meta.env.VITE_FRONTEND_BASE}`
+
 
 
 

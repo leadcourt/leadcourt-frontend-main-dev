@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { checkHubspotConnection, checkZohoConnection, connectionHubspotCRM } from '../../utils/api/crmIntegrations';
+import { checkHubspotConnection, checkZohoConnection, connectionHubspotCRM, connectionZohoCRM } from '../../utils/api/crmIntegrations';
 import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
 import hubspotLogo from "../../assets/integrations/hubspot/HubSpot.png";
@@ -45,9 +45,9 @@ const Integrations = () => {
           </svg>
         </div>
       ),
-      color: false,
+      color: true,
       connection: connections['Zoho']?.connected || false,
-      connectionLink: null,
+      connectionLink: connectionZohoCRM,
     },
   ];
   
