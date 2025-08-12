@@ -444,7 +444,8 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
     placeholder={`Select Organization`}
     className={`   p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
       selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-    } overflow-auto  text-sm shadow border border-gray-200 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+    // } overflow-auto  text-sm shadow border border-gray-200 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
  
   />
 </div>
@@ -484,7 +485,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             placeholder={`Select ${"Organization Size"}`}
             className={`${creditInfo?.subscriptionType === 'FREE' ? 'bg-gray-400': ''}  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
          
           />
         </div>
@@ -524,7 +525,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             placeholder={`Select ${"Organization Industry"}`}
             className={`${creditInfo?.subscriptionType === 'FREE' ? 'bg-gray-400': ''}  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
          
           />
         </div>
