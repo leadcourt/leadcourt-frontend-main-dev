@@ -417,7 +417,7 @@ export default function DataTablePage() {
       </Dialog>
       <div className="grid grid-cols-12 overflow-hidden">
         {/* The filter section */}
-        <div className="h-[90vh] lg:borderr-2 lg:shadow-xl border-r-gray-300 lg:mr-1 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 max-h-[90vh] overflow-y-auto overflow-x-hidden static">
+        <div className="h-[90vh] lg:border-r-2 lg:shadow-xl border-r-gray-100 lg:mr-1 col-span-12 lg:col-span-3 gap-3 lg:gap-0 p-3 max-h-[90vh] overflow-y-auto overflow-x-hidden static">
           {/* {keyFilters.Designation} */}
           <h2 className="font-bold mb-4 col-span-12 text-2xl text-gray-600">
             Filters

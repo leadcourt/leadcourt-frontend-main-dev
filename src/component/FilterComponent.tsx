@@ -307,7 +307,7 @@ export default function FilterComponent({
             // virtualScrollerOptions={{ itemSize: 43 }}
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["Country"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -357,7 +357,7 @@ export default function FilterComponent({
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["State"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -406,7 +406,7 @@ export default function FilterComponent({
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -470,7 +470,7 @@ export default function FilterComponent({
               selectedFilters["Designation"]?.length > 0
                 ? "flex flex-wrap "
                 : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -522,7 +522,7 @@ export default function FilterComponent({
             placeholder={`Select Organization`}
             className={`   p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
             // } overflow-auto  text-sm shadow border border-gray-200 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
