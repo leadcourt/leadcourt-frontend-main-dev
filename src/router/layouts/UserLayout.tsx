@@ -61,7 +61,7 @@ export default function UserLayout() {
                   sideBar ? "lg:w-[calc(100%-200px)]" : "lg:w-[calc(100%-80px)]"
                 }  z-40`}
               >
-                <div className="relative border-b-gray-100 border-b items-center justify-between flex bg-white ">
+                <div className="relative border-b-gray-100 border-b-2 items-center justify-between flex bg-white ">
                   <Topbar />
                   <div className="lg:hidden">
                     {displaySide ? (
