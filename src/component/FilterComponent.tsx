@@ -279,7 +279,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             // virtualScrollerOptions={{ itemSize: 43 }}
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["Country"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -317,7 +317,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["State"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -355,7 +355,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -406,7 +406,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
           
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["Designation"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
            
           />
         </div>
@@ -484,7 +484,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             placeholder={`Select ${"Organization Size"}`}
             className={`${creditInfo?.subscriptionType === 'FREE' ? 'bg-gray-400': ''}  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
          
           />
         </div>
@@ -524,7 +524,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
             placeholder={`Select ${"Organization Industry"}`}
             className={`${creditInfo?.subscriptionType === 'FREE' ? 'bg-gray-400': ''}  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm shadow border border-gray-100 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
          
           />
         </div>
@@ -537,7 +537,7 @@ export default function FilterComponent({ functionName, setFitler, setPage }: an
       {loadingData==='Main filter'? 
 
 <button
-className={`bg-[#f34f146c] cursor-not-allowed flex items-center justify-center gap-2 rounded-lg text-white text-sm font-bold py-3 w-full mt-5`}
+className={`bg-[#f34f146c] cursor-not-allowed flex items-center justify-center gap-2 rounded-lg text-white text-sm font-bold py-3 w-full`}
 > <i className="pi pi-spin pi-spinner" ></i>
   Filter
 </button>
