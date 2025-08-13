@@ -44,7 +44,7 @@ const SupportPage:any = ({faq}:any) => {
             <SupportOption
               icon={<i className="pi pi-question"></i>}
               title="FAQ"
-              description="182 Park Row Street, Suite 8"
+              description=""
             />
             </Link>
           }

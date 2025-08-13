@@ -27,7 +27,14 @@ const checkZohoConnection = async () => {
     return await axios.get(`${baseUrl}/integrations/zoho/check`, )
 }
 
+const postZohoCRMCode = async (payload: any) => {
+    return await axios.post(`${baseUrl}/integrations/zoho/exchange-code`, payload)
+}
+
+
+
 const connectionZohoCRM = import.meta.env.VITE_ZOHO_URL
+// ZohoCRM.users.ALL
 // `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL&client_id=${import.meta.env.VITE_ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${import.meta.env.VITE_FRONTEND_BASE}`
 
 
@@ -42,5 +49,6 @@ export {
     connectionHubspotCRM,
     
     checkZohoConnection,
+    postZohoCRMCode,
     connectionZohoCRM,
 }
