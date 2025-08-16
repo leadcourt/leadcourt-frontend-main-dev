@@ -26,16 +26,7 @@ interface PaymentInIndiaData {
   amount: number;
   subscriptionType: string;
 }
-
-interface CountryAmount {
-  starter: number;
-  pro: number;
-  business: number;
-  custom: number;
-  currency: string;
-}
-
-
+ 
 
 const BuyCredit = () => {
   const user = useRecoilValue(userState);
@@ -56,22 +47,22 @@ const BuyCredit = () => {
     subscriptionType: "",
   });
 
-  const sub_price = [
-    {
-      starter: 1720,
-      pro: 5161,
-      business: 8602,
-      custom: 0,
-      currency: "₹",
-    },
-    {
-      starter: 20,
-      pro: 60,
-      business: 100,
-      custom: 0,
-      currency: "$",
-    },
-  ];
+  // const sub_price = [
+  //   {
+  //     starter: 1720,
+  //     pro: 5161,
+  //     business: 8602,
+  //     custom: 0,
+  //     currency: "₹",
+  //   },
+  //   {
+  //     starter: 20,
+  //     pro: 60,
+  //     business: 100,
+  //     custom: 0,
+  //     currency: "$",
+  //   },
+  // ];
   // const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(
   //   sub_price[1]
   // );
@@ -108,6 +99,8 @@ const [countryCurrency, setCountryCurrency] = useState({
   
 
   const calculatePrice = (credits: number): number => {
+    console.log(credits/100);
+    
     if (location === "IN") {
       return Math.round((credits / 1000) * (currencyConverter[0].rate*10));
     } else {
@@ -116,10 +109,10 @@ const [countryCurrency, setCountryCurrency] = useState({
   };
 
   // Update price when credit amount changes
-  const handleCreditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const creditValue = parseInt(e.target.value);
-    setCreditAmount(creditValue);
-  };
+  // const handleCreditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const creditValue = parseInt(e.target.value);
+  //   setCredcitAmount(creditValue);
+  // };
 
   const handlePaymentPlan = async (planType: PaymentPlanType) => {
     // if (true) {
@@ -163,9 +156,9 @@ const [countryCurrency, setCountryCurrency] = useState({
   }, []);
 
   // Update price whenever credit amount changes
-  useEffect(() => {
-    // setTotalPrice(calculatePrice(creditAmount));
-  }, [creditAmount, location]);
+  // useEffect(() => {
+  //   // setTotalPrice(calculatePrice(creditAmount));
+  // }, [creditAmount, location]);
 
   return (
     <div className="min-h-screen w-full p-5 ">
@@ -303,9 +296,9 @@ const [countryCurrency, setCountryCurrency] = useState({
                     </svg>
                     {
                       annualSub ? 
-                      <span> ${(planItem.credits*12).toLocaleString()} {feature}</span>
+                      <span> {(planItem.credits*12).toLocaleString()} {feature}</span>
                       :
-                    <span> ${planItem.credits.toLocaleString()} {feature}</span>
+                    <span> {planItem.credits.toLocaleString()} {feature}</span>
                     }
                   </li>
                   :
@@ -399,7 +392,9 @@ const [countryCurrency, setCountryCurrency] = useState({
                     max={50000}
                     value={creditAmount}
                     step={1000}
-                    onChange={handleCreditChange}
+                    onChange={(e)=>setCreditAmount(parseInt(e.target.value))}
+
+
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
@@ -416,8 +411,10 @@ const [countryCurrency, setCountryCurrency] = useState({
                       Total Price:
                     </span>
                     <span className="text-3xl font-bold text-orange-500">
-                      {/* {paymentAmount.currency} */}
-                      {calculatePrice(creditAmount)}
+                      {countryCurrency.symbol}
+                      {/* {' '}{countryCurrency.rate*(creditAmount/100)} {' '} */}
+                      {/* {calculatePrice(creditAmount).toLocaleString()} */}
+                      {(calculatePrice(creditAmount)*Math.round(countryCurrency.rate)).toLocaleString()}
                     </span>
                   </div>
                 </div>
