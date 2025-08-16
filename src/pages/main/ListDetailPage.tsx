@@ -650,7 +650,7 @@ export default function ListDetailPage() {
           </button>
         </div>
 
-<div className=" overflow-hidden overflow-y-auto scrollbarhide max-h-[70vh] ">
+<div className=" overflow-hidden overflow-y-auto scrollbar-hide h-[70vh] border">
         {loading ? (
           <DataTable
             value={Array(10).fill(loadingColumns)}
@@ -658,6 +658,8 @@ export default function ListDetailPage() {
             globalFilterFields={fields}
             tableStyle={{ minWidth: "100%" }}
             dataKey="row_id"
+                  scrollable 
+                  scrollHeight="70vh"
             // paginator
             className="text-sm rounded-lg overflow-hidden"
             rows={50}
@@ -722,7 +724,7 @@ export default function ListDetailPage() {
               tableStyle={{ minWidth: "100%" }}
               dataKey="row_id"
                   scrollable 
-                  scrollHeight="400px" 
+                  scrollHeight="70vh" 
               // paginator
               className="text-sm rounded-lg overflow-hidden"
               rows={50}

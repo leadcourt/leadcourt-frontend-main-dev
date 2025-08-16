@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Starter",
+    "description": "Perfect for small businesses",
+    "dollar_amount": "20",
+    "default_duration": "monthly",
+    "credits": 3000,
+    "features": ["All Free Features", "3,000 credits", "Advanced filters"]
+  },
+  {
+    "name": "Pro",
+    "description": "Ideal for growing teams",
+    "dollar_amount": "60",
+    "default_duration": "monthly",
+    "credits": 10000,
+    "features": [
+      "All Starter features",
+      "10,000 credits",
+      "Team collaboration",
+      "CRM integration"
+    ]
+  },
+  {
+    "name": "Business",
+    "description": "For established businesses",
+    "dollar_amount": "100",
+    "default_duration": "monthly",
+    "credits": 15000,
+    "features": [
+      "All Pro features",
+      "15,000 credits",
+      "Dedicated support",
+      "API access"
+    ]
+  }
+]

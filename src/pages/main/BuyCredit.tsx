@@ -7,7 +7,11 @@ import SupportPage from "../../component/settings/SupportPage";
 import PaymentInIndia from "../../component/settings/PaymentInIndia";
 import { getLocation } from "../../utils/api/location";
 import { useSearchParams } from "react-router-dom";
-import paymentFailed from '../../assets/icons/payment_failed.jpeg'
+import paymentFailed from "../../assets/icons/payment_failed.jpeg";
+import SwitchInputButton from "../../component/SwitchInputButton";
+import planData from "../../utils/buyCredit.json"
+
+
 
 interface PaymentPlanType {
   userId: string | undefined;
@@ -28,26 +32,28 @@ interface CountryAmount {
   pro: number;
   business: number;
   custom: number;
-  currency: string
+  currency: string;
 }
 
 const BuyCredit = () => {
   const user = useRecoilValue(userState);
-  const [location, setLocation] = useState<string>('');
+  const [location, setLocation] = useState<string>("");
+  const [annualSub, setAnnualSub] = useState<boolean>(false);
   const calculatePrice = (credits: number): number => {
-    
-    if (location==="IN") {
-      return Math.round((credits / 1000) * 860);      
+    if (location === "IN") {
+      return Math.round((credits / 1000) * 860);
     } else {
-      return Math.round((credits / 1000) * 10);      
-    } 
+      return Math.round((credits / 1000) * 10);
+    }
   };
   const [creditAmount, setCreditAmount] = useState<number>(10000);
-  const [totalPrice, setTotalPrice] = useState<number>(() => calculatePrice(10000));
+  const [totalPrice, setTotalPrice] = useState<number>(() =>
+    calculatePrice(10000)
+  );
   const [visible, setVisible] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlanType>();
   const [options, setOptions] = useState<string>();
-  const [paymentStatus, setPaymentStatus] = useState<boolean>(false)
+  const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
 
   const [indiaPayment, setIndiaPayment] = useState<PaymentInIndiaData>({
     location: "",
@@ -56,36 +62,54 @@ const BuyCredit = () => {
     subscriptionType: "",
   });
 
-  
   const sub_price = [
     {
       starter: 1720,
       pro: 5161,
       business: 8602,
       custom: 0,
-      currency: '₹'
+      currency: "₹",
     },
     {
       starter: 20,
       pro: 60,
       business: 100,
       custom: 0,
-      currency: '$'
+      currency: "$",
     },
   ];
-  const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(sub_price[1]);
+  const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(
+    sub_price[1]
+  );
   // Calculate price based on credits (at $10 per 1000 credits)
+const [countryCurrency, setCountryCurrency] = useState({
+      rate: 1,
+      currency:"usd",
+      symbol: "$",
+    })
 
-  const [urlSearchParams] = useSearchParams()
+
+  const currencyConverter = [
+    {
+      rate: 87.65,
+      currency:"inr",
+      symbol: "₹",
+    },
+    {
+      rate: 1,
+      currency:"usd",
+      symbol: "$",
+    }
+  ]
+  const [urlSearchParams] = useSearchParams();
 
   const checkUrlSearchParams = () => {
-    const status = urlSearchParams?.get('status');
-    console.log(urlSearchParams?.get('method'));
-    if (status=== 'failed'){
-      setPaymentStatus(true)
+    const status = urlSearchParams?.get("status");
+    console.log(urlSearchParams?.get("method"));
+    if (status === "failed") {
+      setPaymentStatus(true);
     }
-  }
-  
+  };
 
   // Update price when credit amount changes
   const handleCreditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,29 +144,30 @@ const BuyCredit = () => {
     await getLocation().then((res) => {
       setLocation(res?.data?.country);
 
-      if (res?.data?.country==='IN'){
-        setPaymentAmount(sub_price[0])
+      if (res?.data?.country === "IN") {
+        setPaymentAmount(sub_price[0]);
+
+        
+        setCountryCurrency(currencyConverter[0])
       } else {
-        setPaymentAmount(sub_price[1])
+        setPaymentAmount(sub_price[1]);
       }
     });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     checkLocation();
-checkUrlSearchParams()
-  }, []
-  )
+    checkUrlSearchParams();
+  }, []);
 
   // Update price whenever credit amount changes
   useEffect(() => {
-  setTotalPrice(calculatePrice(creditAmount));
-}, [creditAmount, location]);
- 
+    setTotalPrice(calculatePrice(creditAmount));
+  }, [creditAmount, location]);
+
   return (
     <div className="min-h-screen w-full p-5 ">
-
-            <Dialog
+      <Dialog
         header="Payment Failed"
         visible={paymentStatus}
         style={{ width: "400px", padding: "1.5rem", backgroundColor: "white" }}
@@ -155,11 +180,11 @@ checkUrlSearchParams()
           <div className=" w-fit m-auto">
             <img src={paymentFailed} className="h-[100px]" alt="" />
           </div>
-          <p className="max-w-[300px] text-center m-auto mt-5 text-sm text-gray-700">The transaction you are trying to initiate has failed.</p>
+          <p className="max-w-[300px] text-center m-auto mt-5 text-sm text-gray-700">
+            The transaction you are trying to initiate has failed.
+          </p>
         </div>
       </Dialog>
-
-
 
       <Dialog
         header="Support"
@@ -222,23 +247,43 @@ checkUrlSearchParams()
           </div>
 
           {/* Subscription Plans Section */}
-          <section className="mb-10">
+          <section className="mb-10 ">
+            <div className="py-5 w-fit m-auto">
+              <div className="flex items-center">
+                <p className={`${annualSub ? 'text-gray-400':''}`}>Monthly</p>
+                <SwitchInputButton 
+                text=""
+                 disabled={false}
+                 action={annualSub}
+                 setAction={setAnnualSub}
+                  />
+                <p className={`${annualSub ? '':'text-gray-400'}`}>Annual <span className="text-sm text-orange-500">(Save 20%)</span></p>
+              </div>
+            </div>
             <div className="grid md:grid-cols-3 gap-6">
-              {/* Starter Plan */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200  hover:border-orange-200 p-1 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all">
+              {/* All Plan Map */}
+              {planData.map((planItem, index)=>(
+              <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200  hover:border-orange-200 p-1 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all">
                 <div className="bg-gradient-to-b from-[#f34f146c] to-amber-50 rounded-xl p-5 mb-5">
-                  <h3 className="text-xl font-bold mb-2">Starter</h3>
+                  <h3 className="text-xl font-bold mb-2">{planItem.name}</h3>
                   <p className="text-gray-600 mb-4">
-                    Perfect for small businesses
+                    {planItem.description }
                   </p>
                 </div>
                 <div className="text-2xl font-bold text-orange-500 px-5 mb-4">
                   {/*                   $20 */}
-                  {paymentAmount.currency} {paymentAmount.starter}
-                  <span className="text-lg text-gray-500">/mo</span>
+                  {countryCurrency.symbol} {" "}
+                  {annualSub ? 
+                  Math.round(((parseInt(planItem.dollar_amount) * countryCurrency.rate)*12)*0.8)
+                  :
+                  (parseInt(planItem.dollar_amount) * countryCurrency.rate)
+                  }
+                  {/* {paymentAmount.currency} {paymentAmount.starter} */}
+                  <span className="text-lg text-gray-500">{annualSub?"/ann":"/mo"}</span>
                 </div>
                 <ul className="mb-6 px-5 flex-grow">
-                  <li className="flex items-center mb-3">
+                  {planItem.features.map((feature, featIndex)=>(
+                  <li key={featIndex} className="flex items-center mb-3">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-2"
                       fill="none"
@@ -253,257 +298,38 @@ checkUrlSearchParams()
                         d="M5 13l4 4L19 7"
                       ></path>
                     </svg>
-                    <span>All Free Features</span>
+                    <span>{feature}</span>
                   </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>3,000 credits</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>Advanced filters</span>
-                  </li>
+                  ))}
                 </ul>
                 <button
-                  onClick={() =>
+                  onClick={() =>{
+                    annualSub ? 
+                    
                     handlePaymentPlan({
                       userId: user?.id,
-                      plan: "starter".toUpperCase(),
-                  // {.currency} {paymentAmount.starter}
-                      amount: paymentAmount.starter,
-                      credit: 3000,
+                      plan: planItem.name+'_annual'.toUpperCase(),
+                      // {.currency} {paymentAmount.starter}
+                      credit: planItem.credits,
+                      amount: Math.round(((parseInt(planItem.dollar_amount) * countryCurrency.rate)*12)*0.7),
                     })
+                    :
+                    handlePaymentPlan({
+                      userId: user?.id,
+                      plan: planItem.name.toUpperCase(),
+                      // {.currency} {paymentAmount.starter}
+                      amount: parseInt(planItem.dollar_amount) * countryCurrency.rate,
+                      credit: planItem.credits,
+                    })
+                  }
                   }
                   className="bg-orange-500 cursor-pointer text-white font-medium py-3 px-6 rounded-xl hover:bg-orange-400 transition-all w-full"
                 >
                   Buy Now
                 </button>
               </div>
-
-              {/* Pro Plan (Most Popular) */}
-              <div className="bg-white p-1 rounded-xl shadow-sm border border-gray-100 hover:border-orange-200 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all relative">
-                <div className="absolute -top-0 right-8 bg-orange-500 text-white text-xs font-semibold py-1 px-4 rounded-b-lg">
-                  Most Popular
-                </div>
-                <div className="bg-gradient-to-b from-[#f34f146c] to-amber-50 rounded-xl p-5 mb-5">
-                  <h3 className="text-xl font-bold mb-2">Pro</h3>
-                  <p className="text-gray-600 mb-4">Ideal for growing teams</p>
-                </div>
-                <div className="text-2xl font-bold text-orange-500 px-5">
-                  {/*                   $60 */}
-                  {paymentAmount.currency} {paymentAmount.pro}
-
-                  <span className="text-lg text-gray-500">/mo</span>
-                </div>
-                <ul className="p-5 mb-6 flex-grow">
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>All Starter features</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>10,000 credits</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>Team collaboration</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>CRM integration</span>
-                  </li>
-                </ul>
-                <button
-                  onClick={() =>
-                    handlePaymentPlan({
-                      userId: user?.id,
-                      plan: "pro".toUpperCase(),
-                      amount: paymentAmount.pro,
-                      credit: 10000,
-                    })
-                  }
-                  className="bg-orange-500 cursor-pointer text-white font-medium py-3 px-6 rounded-md hover:bg-orange-400 transition-all w-full"
-                >
-                  Buy Now
-                </button>
-              </div>
-
-              {/* Business Plan */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-orange-200 p-1 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all">
-                <div className="bg-gradient-to-b from-[#f34f146c] to-amber-50 rounded-xl p-5 mb-5">
-                  <h3 className="text-xl font-bold mb-2">Business</h3>
-                  <p className="text-gray-600 mb-4">
-                    For established businesses
-                  </p>
-                </div>
-                <div className="text-2xl font-bold text-orange-500 px-5 mb-4">
-                  {/*                   $100 */}
-                  {paymentAmount.currency} {paymentAmount.business}
-                
-                <span className="text-lg text-gray-500">/mo</span>
-                </div>
-                <ul className="px-5 mb-6 flex-grow">
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>All Pro features</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>15,000 credits</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>Dedicated support</span>
-                  </li>
-                  <li className="flex items-center mb-3">
-                    <svg
-                      className="w-5 h-5 text-orange-500 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>API access</span>
-                  </li>
-                </ul>
-                <button
-                  onClick={() =>
-                    handlePaymentPlan({
-                      userId: user?.id,
-                      plan: "business".toUpperCase(),
-                      amount: paymentAmount.business,
-                      credit: 15000,
-                    })
-                  }
-                  className="bg-orange-500 cursor-pointer text-white font-medium py-3 px-6 rounded-md hover:bg-orange-400 transition-all w-full"
-                >
-                  Buy Now
-                </button>
-              </div>
+              ))}
+ 
             </div>
           </section>
 
@@ -565,7 +391,8 @@ checkUrlSearchParams()
                       Total Price:
                     </span>
                     <span className="text-3xl font-bold text-orange-500">
-                      {paymentAmount.currency}{totalPrice}
+                      {paymentAmount.currency}
+                      {totalPrice}
                     </span>
                   </div>
                 </div>

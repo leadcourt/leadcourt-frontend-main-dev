@@ -649,7 +649,7 @@ export default function Collab_ListDetailPage() {
           </button>
         </div>
 
-<div className=" overflow-hidden overflow-y-auto scrollbarhide max-h-[70vh] ">
+<div className=" overflow-hidden overflow-y-auto scrollbar-hide h-[65vh]  ">
 
         {loading ? (
           <DataTable
@@ -658,6 +658,8 @@ export default function Collab_ListDetailPage() {
             globalFilterFields={fields}
             tableStyle={{ minWidth: "100%" }}
             dataKey="row_id"
+                  scrollable 
+                  scrollHeight="64vh" 
             // paginator
             className="text-sm rounded-lg overflow-hidden"
             rows={50}
@@ -722,7 +724,7 @@ export default function Collab_ListDetailPage() {
               tableStyle={{ minWidth: "100%" }}
               dataKey="row_id"
                   scrollable 
-                  scrollHeight="400px" 
+                  scrollHeight="70vh"  
               // paginator
               className="text-sm rounded-lg overflow-hidden"
               rows={50}

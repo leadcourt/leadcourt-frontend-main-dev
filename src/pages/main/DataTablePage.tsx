@@ -353,9 +353,9 @@ export default function DataTablePage() {
 
   const emptyMessageTemplate = () => {
     return (
-      <div className="text-2xl sticky max-w-full w-1/2 m-auto ">
+      <div className="text-2xl h-[60vh] w-full ">
         {/* NO dataaaaaaaaimpo */}
-        <img src={noDataImg} className="w-full" alt="" />
+        <img src={noDataImg} className="h-full" alt="" />
         {/* <noDataImg /> */}
       </div>
     );

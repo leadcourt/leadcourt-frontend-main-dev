@@ -160,8 +160,11 @@ export default function Register() {
                     <FcGoogle />
                     {/* <img src="/api/placeholder/24/24" alt="Google logo" className="mr-2" /> */}
                     <span className="ml-3 text-gray-700">Sign Up with Google</span>
+                    
+
                   </button>
-        
+                  <p className="text-center text-green-600 text-sm">Get 200 free credits instantly</p>
+          
                   {/* <button className="flex items-center justify-center w-full py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     <TiVendorMicrosoft />
         
@@ -204,6 +207,7 @@ export default function Register() {
                   required
                 />
               </div>
+
               {errors.displayName && touched.displayName && (
                 <p className="error text-sm text-red-400">{errors.displayName}</p>
               )}
@@ -335,12 +339,19 @@ export default function Register() {
 
         )
         : (
+          <div className=" flex flex-col gap-3">
           <button
             onClick={() => setUseEmail(true)}
             className="secondary-btn-red flex justify-center items-center gap-3"
-          >
+            >
             <i className="pi pi-envelope "></i> Sign Up with Email
           </button>
+          
+              <div className="text-center">
+                  <p className=" text-green-600 text-sm">Get 500 free credits instantly</p>
+                  <p className=" text-green-500 text-xs">with work email</p>
+              </div>
+            </div>
         )}
 
         {/* Sign In Link */}

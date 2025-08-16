@@ -470,7 +470,7 @@ export default function FilterComponent({
               selectedFilters["Designation"]?.length > 0
                 ? "flex flex-wrap "
                 : ""
-            } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -573,10 +573,10 @@ export default function FilterComponent({
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             placeholder={`Select ${"Organization Size"}`}
             className={`${
-              creditInfo?.subscriptionType === "FREE" ? "bg-gray-400" : ""
+              creditInfo?.subscriptionType === "FREE" ? "bg-gray-400 border" : " hover:shadow border-2 shadow-3xl"
             }  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto  text-sm hover:shadow  border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -626,10 +626,10 @@ export default function FilterComponent({
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
             placeholder={`Select ${"Organization Industry"}`}
             className={`${
-              creditInfo?.subscriptionType === "FREE" ? "bg-gray-400" : ""
+              creditInfo?.subscriptionType === "FREE" ? "bg-gray-400 border" : " hover:shadow border-2 shadow-3xl"
             }  p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
-            } overflow-auto  text-sm hover:shadow border   border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
+            } overflow-auto text-sm  border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
       </div>
