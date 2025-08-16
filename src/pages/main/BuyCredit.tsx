@@ -35,21 +35,15 @@ interface CountryAmount {
   currency: string;
 }
 
+
+
 const BuyCredit = () => {
   const user = useRecoilValue(userState);
   const [location, setLocation] = useState<string>("");
   const [annualSub, setAnnualSub] = useState<boolean>(false);
-  const calculatePrice = (credits: number): number => {
-    if (location === "IN") {
-      return Math.round((credits / 1000) * 860);
-    } else {
-      return Math.round((credits / 1000) * 10);
-    }
-  };
+
   const [creditAmount, setCreditAmount] = useState<number>(10000);
-  const [totalPrice, setTotalPrice] = useState<number>(() =>
-    calculatePrice(10000)
-  );
+  // const [totalPrice, setTotalPrice] = useState<number>();
   const [visible, setVisible] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlanType>();
   const [options, setOptions] = useState<string>();
@@ -78,9 +72,9 @@ const BuyCredit = () => {
       currency: "$",
     },
   ];
-  const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(
-    sub_price[1]
-  );
+  // const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(
+  //   sub_price[1]
+  // );
   // Calculate price based on credits (at $10 per 1000 credits)
 const [countryCurrency, setCountryCurrency] = useState({
       rate: 1,
@@ -108,6 +102,16 @@ const [countryCurrency, setCountryCurrency] = useState({
     console.log(urlSearchParams?.get("method"));
     if (status === "failed") {
       setPaymentStatus(true);
+    }
+  };
+
+  
+
+  const calculatePrice = (credits: number): number => {
+    if (location === "IN") {
+      return Math.round((credits / 1000) * (currencyConverter[0].rate*10));
+    } else {
+      return Math.round((credits / 1000) * (currencyConverter[1].rate*10));
     }
   };
 
@@ -145,12 +149,9 @@ const [countryCurrency, setCountryCurrency] = useState({
       setLocation(res?.data?.country);
 
       if (res?.data?.country === "IN") {
-        setPaymentAmount(sub_price[0]);
-
-        
         setCountryCurrency(currencyConverter[0])
       } else {
-        setPaymentAmount(sub_price[1]);
+        setCountryCurrency(currencyConverter[1])
       }
     });
   };
@@ -158,11 +159,12 @@ const [countryCurrency, setCountryCurrency] = useState({
   useEffect(() => {
     checkLocation();
     checkUrlSearchParams();
+    // setTotalPrice(calculatePrice(10000))
   }, []);
 
   // Update price whenever credit amount changes
   useEffect(() => {
-    setTotalPrice(calculatePrice(creditAmount));
+    // setTotalPrice(calculatePrice(creditAmount));
   }, [creditAmount, location]);
 
   return (
@@ -279,10 +281,34 @@ const [countryCurrency, setCountryCurrency] = useState({
                   (parseInt(planItem.dollar_amount) * countryCurrency.rate)
                   }
                   {/* {paymentAmount.currency} {paymentAmount.starter} */}
-                  <span className="text-lg text-gray-500">{annualSub?"/ann":"/mo"}</span>
+                  <span className="text-lg text-gray-500">{annualSub?"/yr":"/mo"}</span>
                 </div>
                 <ul className="mb-6 px-5 flex-grow">
                   {planItem.features.map((feature, featIndex)=>(
+                    feature === 'credits'? 
+                                      <li key={featIndex} className="flex items-center mb-3">
+                    <svg
+                      className="w-5 h-5 text-orange-500 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                    {
+                      annualSub ? 
+                      <span> ${(planItem.credits*12).toLocaleString()} {feature}</span>
+                      :
+                    <span> ${planItem.credits.toLocaleString()} {feature}</span>
+                    }
+                  </li>
+                  :
                   <li key={featIndex} className="flex items-center mb-3">
                     <svg
                       className="w-5 h-5 text-orange-500 mr-2"
@@ -309,7 +335,6 @@ const [countryCurrency, setCountryCurrency] = useState({
                     handlePaymentPlan({
                       userId: user?.id,
                       plan: planItem.name+'_annual'.toUpperCase(),
-                      // {.currency} {paymentAmount.starter}
                       credit: planItem.credits,
                       amount: Math.round(((parseInt(planItem.dollar_amount) * countryCurrency.rate)*12)*0.7),
                     })
@@ -391,8 +416,8 @@ const [countryCurrency, setCountryCurrency] = useState({
                       Total Price:
                     </span>
                     <span className="text-3xl font-bold text-orange-500">
-                      {paymentAmount.currency}
-                      {totalPrice}
+                      {/* {paymentAmount.currency} */}
+                      {calculatePrice(creditAmount)}
                     </span>
                   </div>
                 </div>

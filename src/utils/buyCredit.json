@@ -5,7 +5,11 @@
     "dollar_amount": "20",
     "default_duration": "monthly",
     "credits": 3000,
-    "features": ["All Free Features", "3,000 credits", "Advanced filters"]
+    "features": [
+      "All Free Features", 
+      "credits",
+      "Advanced filters"
+    ]
   },
   {
     "name": "Pro",
@@ -15,7 +19,7 @@
     "credits": 10000,
     "features": [
       "All Starter features",
-      "10,000 credits",
+      "credits",
       "Team collaboration",
       "CRM integration"
     ]
@@ -28,7 +32,7 @@
     "credits": 15000,
     "features": [
       "All Pro features",
-      "15,000 credits",
+      "credits",
       "Dedicated support",
       "API access"
     ]
