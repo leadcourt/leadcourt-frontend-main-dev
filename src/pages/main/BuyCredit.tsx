@@ -99,8 +99,6 @@ const [countryCurrency, setCountryCurrency] = useState({
   
 
   const calculatePrice = (credits: number): number => {
-    console.log(credits/100);
-    
     if (location === "IN") {
       return Math.round((credits / 1000) * (currencyConverter[0].rate*10));
     } else {
@@ -126,7 +124,7 @@ const [countryCurrency, setCountryCurrency] = useState({
       setIndiaPayment(setIndiaPayload);
     } else {
       // For non-India payments, set the payment plan and show the dialog
-      console.log("payload in not india", location);
+      // console.log("payload in not india", location);
 
       setVisible(true);
       setPaymentPlan(planType);
@@ -329,7 +327,7 @@ const [countryCurrency, setCountryCurrency] = useState({
                       userId: user?.id,
                       plan: planItem.name+'_annual'.toUpperCase(),
                       credit: planItem.credits,
-                      amount: Math.round(((parseInt(planItem.dollar_amount) * countryCurrency.rate)*12)*0.7),
+                      amount: Math.round(((parseInt(planItem.dollar_amount) * countryCurrency.rate)*12)*0.8),
                     })
                     :
                     handlePaymentPlan({
