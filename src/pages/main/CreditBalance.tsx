@@ -85,31 +85,43 @@ export default function CreditBalance() {
         </p>
       </div>
       <div className="my-5 rounded-xl p-5 border border-red-100">
-        <div>
-          <h3>Credit Balance</h3>
-          <p className="flex items-center gap-2">
-            <span className="pi pi-wallet text-[#f34f14] text-xs"></span>
-            <span className="text-gray-500">{creditInfo?.credits}</span>
-          </p>
+        <div className="flex justify-between flex-wrap gap-6">
+          <div>
+            <h3>Credit Balance</h3>
+            <p className="flex items-center gap-2">
+              <span className="pi pi-wallet text-[#f34f14] text-xs"></span>
+              <span className="text-gray-500">{creditInfo?.credits}</span>
+            </p>
+          </div>
+          <div>
+            <h3>Upcoming Plan</h3>
+            <p className="flex items-center gap-2">
+              <span className="pi pi-calendar-plus text-[#f34f14] text-xs"></span>
+              <span className="text-gray-500">{getUpcomingPlan()}</span>
+            </p>
+          </div>
         </div>
-        <div className="mt-5">
-          <h3>Active Subscription</h3>
-          <p className="flex items-center gap-2">
-            <span className="pi pi-briefcase text-[#f34f14] text-xs"></span>
-            <span className="text-gray-500">{creditInfo?.subscriptionType}</span>
-          </p>
-        </div>
-        <div className="mt-5">
-          <h3>Expiry Date</h3>
-          <p className="text-gray-500">
-            {creditInfo?.expiresAt ? formatDate(creditInfo.expiresAt) : "—"}
-          </p>
-        </div>
-        <div className="mt-5">
-          <h3>Upcoming Plan</h3>
-          <p className="text-gray-500">{getUpcomingPlan()}</p>
+      
+        <div className="flex justify-between flex-wrap gap-6 mt-5">
+          <div>
+            <h3>Active Subscription</h3>
+            <p className="flex items-center gap-2">
+              <span className="pi pi-briefcase text-[#f34f14] text-xs"></span>
+              <span className="text-gray-500">{creditInfo?.subscriptionType}</span>
+            </p>
+          </div>
+          <div>
+            <h3>Expiry Date</h3>
+            <p className="flex items-center gap-2">
+              <span className="pi pi-calendar text-[#f34f14] text-xs"></span>
+              <span className="text-gray-500">
+                {creditInfo?.expiresAt ? formatDate(creditInfo.expiresAt) : "—"}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
+
 
       <div>
         {transactions?.map((items) => (
