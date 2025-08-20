@@ -150,7 +150,7 @@ export default function Register() {
           <p className="text-gray-600">
             Please create an account to continue using our service
           </p>
-          <div className="text-xs text-gray-500 p-2 m-2 bg-red-50 rounded-lg">By signing up below, I agree to LeadCourt's <i className="underline text-800"><Link to={'https://www.leadcourt.com/termsandcondition.html'}>Terms and conditions</Link></i> and <i className="underline text-800"><Link to={'https://www.leadcourt.com/privacyandpolicy.html'}>Privacy Policy</Link></i> .</div>
+          <div className="text-xs text-gray-500 p-2 m-2 bg-red-50 rounded-lg">By signing up below, you agree to LeadCourt's <i className="underline text-800"><Link to={'https://www.leadcourt.com/termsandcondition.html'}>Terms and conditions</Link></i> and <i className="underline text-800"><Link to={'https://www.leadcourt.com/privacyandpolicy.html'}>Privacy Policy</Link></i> .</div>
         </div>
 
 
@@ -163,7 +163,7 @@ export default function Register() {
                     
 
                   </button>
-                  <p className="text-center text-green-600 text-sm">Get 200 free credits instantly</p>
+                  <p className="text-center text-green-600 text-sm">Get 200 free credits</p>
           
                   {/* <button className="flex items-center justify-center w-full py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     <TiVendorMicrosoft />
@@ -334,6 +334,10 @@ export default function Register() {
               )}
               Create an account
             </button>
+            
+              <div className="text-center text-sm">
+                  <p className=" text-green-600 ">Get 500 free credits with work email</p>
+              </div>
           </form>
         </div>
 
@@ -347,9 +351,8 @@ export default function Register() {
             <i className="pi pi-envelope "></i> Sign Up with Email
           </button>
           
-              <div className="text-center">
-                  <p className=" text-green-600 text-sm">Get 500 free credits instantly</p>
-                  <p className=" text-green-500 text-xs">with work email</p>
+              <div className="text-center text-sm">
+                  <p className=" text-green-600 ">Get 500 free credits with work email</p>
               </div>
             </div>
         )}

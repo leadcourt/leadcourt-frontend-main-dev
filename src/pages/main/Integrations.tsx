@@ -45,7 +45,7 @@ const Integrations = () => {
           </svg>
         </div>
       ),
-      color: true,
+      color: false,
       connection: connections['Zoho']?.connected || false,
       connectionLink: connectionZohoCRM,
     },
@@ -205,9 +205,9 @@ const Integrations = () => {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
             More integrations coming soon. Have a request?{' '}
-            <a href="#" className="text-[#F35114] hover:text-[#F35114] font-medium">
+            <Link target="_blank" to="https://www.leadcourt.com/contact.html" className="text-[#F35114] hover:text-[#F35114] font-medium">
               Let us know
-            </a>
+            </Link>
           </p>
         </div>
       </div>

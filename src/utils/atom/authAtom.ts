@@ -25,6 +25,10 @@ export interface Credit {
   id: string;
   credits: number;
   subscriptionType: 'FREE' | 'STARTER' | 'PRO' | 'BUSINESS';
+
+  expiresAt?: string;
+  starterRemainingDays?: number;
+  proRemainingDays?: number;
 }
 
 
