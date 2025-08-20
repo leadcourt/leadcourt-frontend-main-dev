@@ -85,7 +85,7 @@ export default function CreditBalance() {
         </p>
       </div>
       <div className="my-5 rounded-xl p-5 border border-red-100">
-        <div className="flex justify-between flex-wrap gap-6">
+        <div className="grid grid-cols-2 gap-y-6 gap-x-10">
           <div>
             <h3>Credit Balance</h3>
             <p className="flex items-center gap-2">
@@ -93,6 +93,7 @@ export default function CreditBalance() {
               <span className="text-gray-500">{creditInfo?.credits}</span>
             </p>
           </div>
+      
           <div>
             <h3>Upcoming Plan</h3>
             <p className="flex items-center gap-2">
@@ -100,9 +101,7 @@ export default function CreditBalance() {
               <span className="text-gray-500">{getUpcomingPlan()}</span>
             </p>
           </div>
-        </div>
       
-        <div className="flex justify-between flex-wrap gap-6 mt-5">
           <div>
             <h3>Active Subscription</h3>
             <p className="flex items-center gap-2">
@@ -110,6 +109,7 @@ export default function CreditBalance() {
               <span className="text-gray-500">{creditInfo?.subscriptionType}</span>
             </p>
           </div>
+      
           <div>
             <h3>Expiry Date</h3>
             <p className="flex items-center gap-2">
