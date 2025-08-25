@@ -158,6 +158,9 @@ const Integrations = () => {
 
   useEffect(() => {
     checkAllIntegrationConnections();
+
+    console.log('Date.now()', Date.now());
+    
     // hubspotConnection()
     // zohoConnection()
   }, []);
