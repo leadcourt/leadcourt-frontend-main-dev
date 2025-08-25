@@ -16,7 +16,8 @@ import { toast } from "react-toastify";
 import { Dialog } from "primereact/dialog";
 import { Skeleton } from "primereact/skeleton";
 import hubspotLogo from "../../assets/integrations/hubspot/HubSpot.png";
-import { exportToHubspotApi } from "../../utils/api/crmIntegrations";
+import zohoLogo from "../../assets/integrations/zoho/zoho.png";
+import { exportToHubspotApi, exportToZohoApi } from "../../utils/api/crmIntegrations";
 
 interface Person {
   City: string;
@@ -330,6 +331,22 @@ export default function ListDetailPage() {
           }
         })
         .catch(() => {});
+      } else if (exportOptions.toLowerCase() === "zoho"){
+        await exportToZohoApi(payload).then((res)=>{
+          console.log("response from hubspot export", res);
+
+          if (res?.data?.success) {
+            toast.success("Exported to Zoho successfully");
+            // window.open(
+            //   `https://app-na2.hubspot.com/import/${res?.data?.portalId}`,
+            //   "_blank",
+            //   "noopener,noreferrer"
+            // );
+
+          }
+
+        })
+
     } else if (exportOptions.toLowerCase() === "email") {
       payload["email"] = user?.email;
       await exportList(payload)
@@ -342,6 +359,7 @@ export default function ListDetailPage() {
     }
     setVisible(false);
     setExportLoading(false);
+    
   };
 
   const listDetail = async (pageNum: number) => {
@@ -556,6 +574,18 @@ export default function ListDetailPage() {
                 alt=""
               />
               <span>Hubspot</span>
+            </button>
+
+            <button
+              onClick={() => openDialog("zoho")}
+              className="transition_hover group text-xs flex items-center gap-2 cursor-pointer border hover:bg-[#F35114] border-[#F35114] font-bold hover:text-white text-[#F35114] px-2 py-1 rounded-lg"
+            >
+              <img
+                src={zohoLogo}
+                className="w-5 transition_hover group-hover:p-1 bg-white rounded "
+                alt=""
+              />
+              <span>Zoho</span>
             </button>
 
             <button

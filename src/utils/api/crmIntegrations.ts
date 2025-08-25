@@ -17,6 +17,7 @@ const disconnetHubspotCRMCode = async () => {
 const exportToHubspotApi = async (payload: any) => {
     return await axios.post(`${baseUrl}/integrations/hubspot/export`, payload)
 }
+
 const connectionHubspotCRM = 'https://app-na2.hubspot.com/oauth/authorize?client_id=eb0927e7-a1c9-461b-9be4-73eaa4848a4c&redirect_uri=https://app.leadcourt.com/integrations/hubspot/callback&scope=crm.objects.contacts.write%20crm.schemas.contacts.write%20crm.import%20oauth%20files%20crm.schemas.contacts.read%20crm.objects.contacts.read'
 
 // /api/integrations/zoho
@@ -32,6 +33,9 @@ const postZohoCRMCode = async (payload: any) => {
     return await axios.post(`${baseUrl}/integrations/zoho/callback`, payload)
 }
 
+const exportToZohoApi = async (payload: any) => {
+    return await axios.post(`${baseUrl}/integrations/zoho/export`, payload)
+}
 
 const disconnetZohoCRMCode = async () => {
     return await axios.delete(`${baseUrl}/integrations/zoho/delete`)
@@ -43,6 +47,10 @@ const connectionZohoCRM = import.meta.env.VITE_ZOHO_URL
 
 
 
+// /api/integrations/checkAll
+const checkAllIntegration = async () => {
+    return await axios.get(`${baseUrl}/integrations/checkAll`, )
+}
 
 export {
     checkHubspotConnection,
@@ -50,10 +58,15 @@ export {
     disconnetHubspotCRMCode,
     exportToHubspotApi,
     
-    connectionHubspotCRM,
     
     checkZohoConnection,
     postZohoCRMCode,
-    connectionZohoCRM,
     disconnetZohoCRMCode,
+
+    exportToZohoApi,
+    
+    connectionHubspotCRM,
+    connectionZohoCRM,
+
+    checkAllIntegration
 }
