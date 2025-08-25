@@ -45,7 +45,7 @@ const Integrations = () => {
           </svg>
         </div>
       ),
-      color: false,
+      color: true,
       connection: connections['Zoho']?.connected || false,
       connectionLink: connectionZohoCRM,
     },

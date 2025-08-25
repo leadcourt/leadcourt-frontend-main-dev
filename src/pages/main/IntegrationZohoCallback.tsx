@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import {
   connectionZohoCRM,
+  disconnetZohoCRMCode,
   // disconnetHubspotCRMCode,
   // postHubspotCRMCode,
   postZohoCRMCode,
 } from "../../utils/api/crmIntegrations";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import hubspotLogo from "../../assets/integrations/hubspot/HubSpot.png";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const IntegrationZohoCallback = () => {
@@ -14,6 +16,7 @@ const IntegrationZohoCallback = () => {
     "processing"
   );
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [loading, setloading] = useState(false)
 
   const navigate = useNavigate();
 
@@ -87,12 +90,15 @@ const IntegrationZohoCallback = () => {
   };
 
   const disconnectZoho = async () => {
-  //   await disconnetZohoCRMCode().then((res) => {
-  //     if (res.data.message.endsWith("Zoho connection removed")) {
-  //       toast.info("Zoho disconnected!");
-  //       navigate("/integrations");
-  //     }
-  //   });
+  setloading(true)
+    await disconnetZohoCRMCode().then((res) => {
+      if (res.data.message.endsWith("Zoho connection removed")) {
+        toast.info("Zoho disconnected!");
+        navigate("/integrations");
+      }
+    });
+  setloading(false)
+
   };
 
   const handleTryAgain = () => {
@@ -151,8 +157,7 @@ const IntegrationZohoCallback = () => {
             </h2>
 
             <p className="text-gray-600 mb-6">
-              Your Zoho account has been successfully connected. Contact and
-              activity data will now sync between your applications.
+              Your Zoho account has been successfully connected. You can now successfully export data directly to your Zoho CRM.
             </p>
 
             <div className="bg-gray-50 rounded-lg p-4 mb-6">
@@ -186,8 +191,9 @@ const IntegrationZohoCallback = () => {
 
               <button
                 onClick={disconnectZoho}
-                className="w-full px-6 py-1 button_hover text-white font-medium rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                className="max-w-[400px] m-auto flex items-center gap-3 px-6 py-2 button_hover text-white font-medium rounded-lg transition-colors duration-150 "
               >
+              {loading ? <i className="pi pi-spinner pi-spin"></i> :''}
                 Disconnect
               </button>
 

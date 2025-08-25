@@ -28,10 +28,14 @@ const checkZohoConnection = async () => {
 }
 
 const postZohoCRMCode = async (payload: any) => {
-    return await axios.post(`${baseUrl}/integrations/zoho/exchange-code`, payload)
+    // return await axios.post(`${baseUrl}/integrations/zoho/exchange-code`, payload)
+    return await axios.post(`${baseUrl}/integrations/zoho/callback`, payload)
 }
 
 
+const disconnetZohoCRMCode = async () => {
+    return await axios.delete(`${baseUrl}/integrations/zoho/delete`)
+}
 
 const connectionZohoCRM = import.meta.env.VITE_ZOHO_URL
 // ZohoCRM.users.ALL
@@ -51,4 +55,5 @@ export {
     checkZohoConnection,
     postZohoCRMCode,
     connectionZohoCRM,
+    disconnetZohoCRMCode,
 }
