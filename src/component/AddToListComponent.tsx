@@ -34,11 +34,7 @@ function AddToListComponent({ people, onClose }: any) {
 
     await getAllList(payload).then((res) => {
       setExistingList(res.data);
-    });
-    // .catch((err) => {
-    //   console.log("Error occurred: ", err);
-    // });
-
+    }); 
     setLoading(false);
   };
 

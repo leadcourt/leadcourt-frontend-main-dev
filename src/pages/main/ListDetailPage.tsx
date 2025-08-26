@@ -308,7 +308,7 @@ export default function ListDetailPage() {
   };
 
   const exportCurrentList = async () => {
-    setExportLoading(true);
+    // setExportLoading(true);
 
     const payload: any = {
       listName: params?.listName,
@@ -343,8 +343,12 @@ export default function ListDetailPage() {
             //   "noopener,noreferrer"
             // );
 
-          }
+          } 
 
+        }).catch(()=>{
+          console.log('After all function in error response', exportLoading)
+            toast.info("Error occured while exporting");
+          
         })
 
     } else if (exportOptions.toLowerCase() === "email") {
@@ -360,6 +364,8 @@ export default function ListDetailPage() {
     setVisible(false);
     setExportLoading(false);
     
+
+
   };
 
   const listDetail = async (pageNum: number) => {
@@ -538,6 +544,8 @@ export default function ListDetailPage() {
             </div>
 
             <div className=" cursor-pointer w-fit m-auto">
+              The export - 
+              {exportLoading === true ? 'loading': 'not loading'}
               <button
                 onClick={exportCurrentList}
                 className="bg-[#F35114] flex items-center gap-2 cursor-pointer text-white text-md rounded-full px-6 py-2"

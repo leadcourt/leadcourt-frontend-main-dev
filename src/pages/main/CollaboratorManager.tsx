@@ -3,14 +3,13 @@ import {
   Users,
   UserPlus,
   Mail,
-  MoreHorizontal,
   Check,
   AlertCircle,
   Settings,
   Crown,
   Eye,
   Edit3,
-  // Trash2,
+  Trash2,
   Search,
 } from "lucide-react";
 import { Dialog } from "primereact/dialog";
@@ -18,6 +17,7 @@ import {
   getAllInvitations,
   getAllSentInvitations,
   inviteUser,
+  removeCollaboration,
 } from "../../utils/api/collaborationAPI";
 import { useFormik } from "formik";
 import { addCollaborationValidation } from "../../utils/validation/collabValidation";
@@ -46,6 +46,10 @@ interface Collaborator {
   lastActive: string;
 }
 
+interface deleteData {
+  loading: boolean;
+  collab: string;
+}
 const CollaboratorManager: React.FC = () => {
   const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
   const [loading, setLoading] = useState(false);
@@ -54,11 +58,11 @@ const CollaboratorManager: React.FC = () => {
   const [selectedCollaborators, setSelectedCollaborators] = useState<string[]>(
     []
   );
-  // const [editingRole, setEditingRole] = useState<string | null>(null);
+  const [loadingDeleteCollab, setLoadingDeleteCollab] = useState<deleteData>();
 
   const creditInfo = useRecoilValue(creditState);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // const user = useRecoilValue(userState)
 
@@ -100,11 +104,29 @@ const CollaboratorManager: React.FC = () => {
   //   setEditingRole(null);
   // };
 
-  // const handleRemoveCollaborator = (collaboratorId: string) => {
-  //   setCollaborators(
-  //     collaborators?.filter((collab) => collab.id !== collaboratorId)
-  //   );
-  // };
+  const handleRemoveCollaborator = async (collaboratorId: string) => {
+    setLoadingDeleteCollab({
+      loading: true,
+      collab: collaboratorId,
+    });
+    await removeCollaboration(collaboratorId).then((res) => {
+      if (res.data.status === 204 ){
+        setCollaborators(
+          collaborators?.filter((collab) => collab.id !== collaboratorId)
+        );
+        toast.info('Collaborator is removed successfully!')
+      }
+    }).catch(( )=>{
+        toast.info('Unable to removed collaborator!')
+
+    });
+
+    
+    setLoadingDeleteCollab({
+      loading: false,
+      collab: '',
+    });
+  };
 
   const handleBulkAction = (action: "remove" | "resend") => {
     if (action === "remove") {
@@ -356,7 +378,7 @@ const CollaboratorManager: React.FC = () => {
               </button>
             ) : (
               <button
-                onClick={() => navigate('/subscription')}
+                onClick={() => navigate("/subscription")}
                 className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
               >
                 <i className=" ">Upgrade Account</i>
@@ -513,20 +535,19 @@ const CollaboratorManager: React.FC = () => {
                         </span>
                       )} */}
 
-                       <span
-                          className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${
-                            roleColors[collaborator.role]
-                          } ${
-                            collaborator.role !== "owner"
-                              ? "cursor-pointer hover:opacity-80"
-                              : ""
-                          }`} 
-                        >
-                          <RoleIcon role={collaborator.role} />
-                          {collaborator.role.charAt(0).toUpperCase() +
-                            collaborator.role.slice(1)}
-                        </span>
-                      
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${
+                          roleColors[collaborator.role]
+                        } ${
+                          collaborator.role !== "owner"
+                            ? "cursor-pointer hover:opacity-80"
+                            : ""
+                        }`}
+                      >
+                        <RoleIcon role={collaborator.role} />
+                        {collaborator.role.charAt(0).toUpperCase() +
+                          collaborator.role.slice(1)}
+                      </span>
                     </td>
                     <td className="py-4 px-4">
                       <span
@@ -548,16 +569,23 @@ const CollaboratorManager: React.FC = () => {
                       {collaborator.role !== "owner" && (
                         <div className="flex items-center gap-2">
                           {/* <button
-                            onClick={() =>
-                              handleRemoveCollaborator(collaborator.id)
-                            }
                             className="text-red-600 hover:text-red-800 p-1 rounded transition-colors"
                             title="Remove collaborator"
                           >
-                            <Trash2 className="w-4 h-4" />
                           </button> */}
-                          <button className="text-gray-400 hover:text-gray-600 p-1 rounded transition-colors">
-                            <MoreHorizontal className="w-4 h-4" />
+                          <button
+                            title="Remove collaborator"
+                            onClick={() =>
+                              handleRemoveCollaborator(collaborator.id)
+                            }
+                            className="cursor-pointer hover:text-red-400 text-gray-400 p-2 rounded transition-colors"
+                          >
+                            {loadingDeleteCollab &&  loadingDeleteCollab.collab === collaborator.id? (
+                              <i className="pi pi-spinner pi-spin text-red-400"></i>
+                            ) : (
+                              <Trash2 className="w-4 h-4 " />
+                            )}
+                            {/* <MoreHorizontal className="w-4 h-4" /> */}
                           </button>
                         </div>
                       )}
