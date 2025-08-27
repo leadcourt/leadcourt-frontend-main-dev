@@ -368,7 +368,7 @@ const CollaboratorManager: React.FC = () => {
               </p>
             </div>
             {creditInfo?.subscriptionType.toLowerCase() === "pro" ||
-            creditInfo?.subscriptionType.toLowerCase() === "businss" ? (
+            creditInfo?.subscriptionType.toLowerCase() === "business" ? (
               <button
                 onClick={() => setShowInviteModal(true)}
                 className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
