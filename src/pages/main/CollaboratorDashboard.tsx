@@ -20,18 +20,6 @@ import { useSetRecoilState } from "recoil";
 import { collabProjectState } from "../../utils/atom/collabAuthAtom";
 import { toast } from "react-toastify";
 
-// interface Project {
-//   id: string;
-//   name: string;
-//   status: 'active' | 'completed' | 'on-hold' | 'review';
-//   progress: number;
-//   dueDate: string;
-//   collaborators: number;
-//   role: 'owner' | 'admin' | 'editor' | 'viewer';
-//   lastActivity: string;
-//   priority: 'high' | 'medium' | 'low';
-// }
-
 interface Activity {
   id: string;
   type: "comment" | "edit" | "share" | "complete" | "invite";
@@ -76,182 +64,9 @@ const CollaboratorDashboard: React.FC = () => {
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [activeTab, setActiveTab] = useState<"invites" | "team">("team");
-  // const [timeFilter, setTimeFilter] = useState('7d');
   const [searchTerm, setSearchTerm] = useState("");
-
-  // const projects: Project[] = [
-  //   {
-  //     id: '1',
-  //     name: 'Marketing Campaign Q2',
-  //     status: 'active',
-  //     progress: 75,
-  //     dueDate: '2025-07-15',
-  //     collaborators: 8,
-  //     role: 'admin',
-  //     lastActivity: '2 hours ago',
-  //     priority: 'high'
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Website Redesign',
-  //     status: 'review',
-  //     progress: 90,
-  //     dueDate: '2025-07-10',
-  //     collaborators: 5,
-  //     role: 'editor',
-  //     lastActivity: '5 hours ago',
-  //     priority: 'high'
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'Product Documentation',
-  //     status: 'active',
-  //     progress: 45,
-  //     dueDate: '2025-07-20',
-  //     collaborators: 3,
-  //     role: 'editor',
-  //     lastActivity: '1 day ago',
-  //     priority: 'medium'
-  //   },
-  //   {
-  //     id: '4',
-  //     name: 'Brand Guidelines',
-  //     status: 'completed',
-  //     progress: 100,
-  //     dueDate: '2025-06-30',
-  //     collaborators: 4,
-  //     role: 'viewer',
-  //     lastActivity: '3 days ago',
-  //     priority: 'low'
-  //   }
-  // ];
-
-  // const activities: Activity[] = [
-  //   {
-  //     id: '1',
-  //     type: 'comment',
-  //     user: 'Kate Simpson',
-  //     project: 'Marketing Campaign Q2',
-  //     description: 'Added feedback on the landing page design',
-  //     timestamp: '2 hours ago',
-  //     avatar: 'KS'
-  //   },
-  //   {
-  //     id: '2',
-  //     type: 'edit',
-  //     user: 'Andrew Smith',
-  //     project: 'Website Redesign',
-  //     description: 'Updated the navigation structure',
-  //     timestamp: '4 hours ago',
-  //     avatar: 'AS'
-  //   },
-  //   {
-  //     id: '3',
-  //     type: 'complete',
-  //     user: 'You',
-  //     project: 'Brand Guidelines',
-  //     description: 'Completed the color palette section',
-  //     timestamp: '6 hours ago',
-  //     avatar: 'YO'
-  //   },
-  //   {
-  //     id: '4',
-  //     type: 'share',
-  //     user: 'Sarah Johnson',
-  //     project: 'Product Documentation',
-  //     description: 'Shared project with external stakeholders',
-  //     timestamp: '1 day ago',
-  //     avatar: 'SJ'
-  //   },
-  //   {
-  //     id: '5',
-  //     type: 'invite',
-  //     user: 'Kate Simpson',
-  //     project: 'Marketing Campaign Q2',
-  //     description: 'Invited 2 new collaborators to the project',
-  //     timestamp: '2 days ago',
-  //     avatar: 'KS'
-  //   }
-  // ];
-
-  // const invites: Task[] = [
-  //   {
-  //     id: '1',
-  //     title: 'Review homepage mockups',
-  //     project: 'Website Redesign',
-  //     assignee: 'You',
-  //     dueDate: '2025-07-03',
-  //     status: 'pending',
-  //     priority: 'high'
-  //   },
-  //   {
-  //     id: '2',
-  //     title: 'Update campaign metrics',
-  //     project: 'Marketing Campaign Q2',
-  //     assignee: 'Kate Simpson',
-  //     dueDate: '2025-07-02',
-  //     status: 'overdue',
-  //     priority: 'high'
-  //   },
-  //   {
-  //     id: '3',
-  //     title: 'Write API documentation',
-  //     project: 'Product Documentation',
-  //     assignee: 'Andrew Smith',
-  //     dueDate: '2025-07-05',
-  //     status: 'in-progress',
-  //     priority: 'medium'
-  //   },
-  //   {
-  //     id: '4',
-  //     title: 'Finalize brand colors',
-  //     project: 'Brand Guidelines',
-  //     assignee: 'Sarah Johnson',
-  //     dueDate: '2025-06-28',
-  //     status: 'completed',
-  //     priority: 'low'
-  //   }
-  // ];
-
-  // const statusColors = {
-  //   active: 'bg-green-100 text-green-800',
-  //   completed: 'bg-blue-100 text-blue-800',
-  //   'on-hold': 'bg-yellow-100 text-yellow-800',
-  //   review: 'bg-purple-100 text-purple-800'
-  // };
-
-  // const priorityColors = {
-  //   high: 'border-l-red-500',
-  //   medium: 'border-l-yellow-500',
-  //   low: 'border-l-green-500'
-  // };
-
-  // const taskStatusColors = {
-  //   pending: 'bg-gray-100 text-gray-800',
-  //   'in-progress': 'bg-blue-100 text-blue-800',
-  //   completed: 'bg-green-100 text-green-800',
-  //   overdue: 'bg-red-100 text-red-800'
-  // };
-
-  // const activityIcons = {
-  //   comment: MessageSquare,
-  //   edit: Edit3,
-  //   share: Share2,
-  //   complete: CheckCircle2,
-  //   invite: Users
-  // };
-
-  // const ActivityIcon = ({ type }: { type: string }) => {
-  //   const Icon = activityIcons[type as keyof typeof activityIcons];
-  //   return Icon ? <Icon className="w-4 h-4" /> : <Activity className="w-4 h-4" />;
-  // };
-
-  // const getProgressColor = (progress: number) => {
-  //   if (progress >= 80) return 'bg-green-500';
-  //   if (progress >= 50) return 'bg-yellow-500';
-  //   return 'bg-red-500';
-  // };
-
+ 
+ 
   const getStatusIcon = (status: any) => {
     switch (status) {
       case "Pending":
@@ -364,12 +179,11 @@ const CollaboratorDashboard: React.FC = () => {
 
   const getInvitations = async () => {
     await getAllInvitations().then((res) => {
-      console.log(res);
 
       if (res?.status === 200) {
         setInvitations(res?.data?.invites);
       } else {
-        console.error("Failed to fetch invitations:", res);
+        console.error("Failed to fetch invitations:");
       }
     });
   };
@@ -384,7 +198,6 @@ const CollaboratorDashboard: React.FC = () => {
     setLoadingResponse(response);
 
     await replyInvite(payload).then((res) => {
-      console.log("REponse to invitation: ", res);
 
       if (res?.status === 200 && res?.data?.message === "Invite declined") {
         toast.success("Invitation Declined Successful");
@@ -554,33 +367,11 @@ const CollaboratorDashboard: React.FC = () => {
 
   const collabProjects = async () => {
     await getAcceptedInvitations().then((res) => {
-      console.log("Response: ", res);
       if (res?.status === 200) {
         setAllProjects(res?.data?.invites);
       } else {
-        console.error("Failed to fetch collaborated projects:", res);
-      }
-      //         {
-      //     "_id": "6876637a3f70c8b6a79b1f92",
-      //     "owner": "k7MZWdxbWpWW5FUUnXbf63irMUi2",
-      //     "ownerName": "Samuel Ladi",
-      //     "collaborator": "8bsDq6UU6GcIGUJWTxXW2yKrS8Q2",
-      //     "collaboratorName": "Samuel Ladi",
-      //     "collaboratorEmail": "ladisamuel00@gmail.com",
-      //     "permission": "viewer",
-      //     "status": "accepted",
-      //     "invitedAt": "2025-07-15T14:19:38.675Z",
-      //     "__v": 0
-      // }
-      //         {
-      //   id: 1,
-      //   name: 'John Doe',
-      //   description: 'john.doe@****',
-      //   lastActivity: '2 hours ago',
-      //   collaborators: ['John Doe', 'Jane Smith', 'Mike Johnson'],
-      //   status: 'Active',
-      //   progress: 75
-      // },
+        console.error("Failed to fetch collaborated projects:");
+      } 
     });
   };
 
@@ -643,55 +434,7 @@ const CollaboratorDashboard: React.FC = () => {
             <div className="space-y-6">{renderProjects()}</div>
             <CollaboratorManager />
           </div>
-
-          // <div className="space-y-6">
-          //   <div className="flex justify-between items-center">
-          //     <div className="flex items-center gap-4">
-          //       <select className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500">
-          //         <option>All Activities</option>
-          //         <option>Comments</option>
-          //         <option>Edits</option>
-          //         <option>Shares</option>
-          //         <option>Completions</option>
-          //       </select>
-          //       <select className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-500">
-          //         <option>All Projects</option>
-          //         {projects.map(project => (
-          //           <option key={project.id}>{project.name}</option>
-          //         ))}
-          //       </select>
-          //     </div>
-          //   </div>
-
-          //   <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
-          //     <div className="p-6">
-          //       <div className="space-y-6">
-          //         {activities.map((team, index) => (
-          //           <div key={team.id} className="flex items-start gap-4">
-          //             <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-sm font-medium">
-          //               {team.avatar}
-          //             </div>
-          //             <div className="flex-1">
-          //               <div className="flex items-center gap-2 mb-1">
-          //                 <ActivityIcon type={team.type} />
-          //                 <span className="font-medium text-gray-900">{team.user}</span>
-          //                 <span className="text-gray-500">{team.description}</span>
-          //               </div>
-          //               <div className="flex items-center gap-2 text-sm text-gray-500">
-          //                 <span className="font-medium">{team.project}</span>
-          //                 <span>•</span>
-          //                 <span>{team.timestamp}</span>
-          //               </div>
-          //             </div>
-          //             {index < activities.length - 1 && (
-          //               <div className="absolute left-9 mt-12 w-0.5 h-6 bg-gray-200"></div>
-          //             )}
-          //           </div>
-          //         ))}
-          //       </div>
-          //     </div>
-          //   </div>
-          // </div>
+ 
         )}
       </div>
     </div>

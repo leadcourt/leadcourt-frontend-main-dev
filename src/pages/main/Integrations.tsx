@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { checkHubspotConnection, checkZohoConnection, connectionHubspotCRM, connectionZohoCRM } from '../../utils/api/crmIntegrations';
 import {
   checkAllIntegration,
   connectionHubspotCRM,
@@ -62,80 +61,7 @@ const Integrations = () => {
       connectionLink: connectionZohoCRM,
     },
   ];
-
-  // {
-  //   id: 'gong',
-  //   name: 'Gong',
-  //   description: 'Send call recordings from App to your Gong workspace',
-  //   icon: (
-  //     <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-  //       <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-  //         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-  //       </svg>
-  //     </div>
-  //   ),
-  //   color: 'purple',
-  //   connection: connections['Gong']?.connected || false,
-  //   connectionLink: null,
-
-  // },
-  // {
-  //   id: 'slack',
-  //   name: 'Slack',
-  //   description: 'Send call and message logs to your Slack workspace',
-  //   icon: (
-  //     <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center relative">
-  //       <div className="absolute inset-1 bg-white rounded-sm"></div>
-  //       <div className="absolute inset-2 flex items-center justify-center">
-  //         <div className="w-1 h-1 bg-green-600 rounded-full"></div>
-  //       </div>
-  //     </div>
-  //   ),
-  //   color: 'green',
-  //   connection: connections['Slack']?.connected || false,
-  //   connectionLink: null,
-
-  // }
-
-  // const handleConnect = (integrationId: string) => {
-  //   console.log(`Connecting to ${integrationId}`);
-  //   // Handle connection logic here
-  // };
-
-  // const hubspotConnection = async () => {
-  //   setConnections({ ...connections, Hubspot: "checking" });
-  //   console.log("Checking Hubspot connection...");
-
-  //   await checkHubspotConnection()
-  //     .then((response) => {
-  //       const updatedConnection = { ...connections, Hubspot: response.data };
-  //       console.log("Hubspot connection status:", response.data);
-  //       setConnections(updatedConnection);
-
-  //       // Handle the response as needed
-  //     })
-  //     .catch(() => {
-  //       // Handle the error as needed
-  //     });
-  // };
-
-  // const zohoConnection = async () => {
-  //   setConnections({ ...connections, Zoho: "checking" });
-  //   console.log("Checking Zoho connection...");
-
-  //   await checkZohoConnection()
-  //     .then((response) => {
-  //       console.log("response", response);
-  //       const updatedConnection = { ...connections, Zoho: response.data };
-  //       console.log("Zoho connection status:", response.data);
-  //       setConnections(updatedConnection);
-
-  //       // Handle the response as needed
-  //     })
-  //     .catch(() => {
-  //       // Handle the error as needed
-  //     });
-  // };
+ 
 
   const checkAllIntegrationConnections = async () => {
     setConnections({
@@ -146,8 +72,6 @@ const Integrations = () => {
 
     await checkAllIntegration().then((res) => {
       
-      // console.log(res?.data?.zoho?.connected)
-      // console.log('res?.data?.hubspot?.connected', res?.data?.hubspot?.connected)
       setConnections({
         ...connections,
         Hubspot: res?.data?.hubspot,
@@ -158,11 +82,6 @@ const Integrations = () => {
 
   useEffect(() => {
     checkAllIntegrationConnections();
-
-    console.log('Date.now()', Date.now());
-    
-    // hubspotConnection()
-    // zohoConnection()
   }, []);
   return (
     <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
@@ -204,7 +123,6 @@ const Integrations = () => {
                       <div className="flex items-center gap-3">
                         <Tooltip
                           target={`.${integration.id}`}
-                          // className='!bg-gray-500 text-red-400'
                           style={{
                             fontSize: "12px",
                             cursor: "pointer",

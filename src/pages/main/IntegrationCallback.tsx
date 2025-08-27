@@ -10,7 +10,6 @@ const IntegrationCallback = ( ) => {
   const [status, setStatus] = useState<'processing' | 'success' | 'error'>('processing');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-
   const navigate = useNavigate();
 
   const urlParams = new URLSearchParams(location.search);
@@ -50,16 +49,13 @@ const IntegrationCallback = ( ) => {
 
         // Send code to backend
         await postHubspotCRMCode({code: qy}).then((response) => {
-            console.log('Hubspot code response:', response.data);
 
             if (response.status === 200) {
-                // console.log('Integration successful:', response.data);
                 setStatus('success');
             } else {
                 setStatus('error');
                 setErrorMessage('Failed to complete integration');
             }
-            // toast.success('Hubspot code sent successfully!');
         }
         ).catch(( ) => {
         })
@@ -72,8 +68,6 @@ const IntegrationCallback = ( ) => {
   };
 
   useEffect(() => {
-    console.log('navigationState', navigationState);
-    
     processCallback();
   }, []);
 

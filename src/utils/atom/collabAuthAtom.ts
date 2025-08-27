@@ -24,7 +24,6 @@ const cookieStorage = (keyPrefix = '') => ({
     Cookies.set(`${keyPrefix}${key}`, value, {
       expires: key.includes('refresh') ? 30 : 1,
       secure: true,
-      // sameSite: null,
       sameSite: 'strict',
     });
   },

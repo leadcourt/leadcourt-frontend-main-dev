@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const baseUrl = import.meta.env.VITE_BE_URL
-// const baseUrl='https://kyoto-creative.online/'
 
 const makePayment = async (payload: any) => {
     return await axios.post(`${baseUrl}/phonepe/payment`, payload)

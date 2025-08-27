@@ -29,7 +29,6 @@ const LeadCourtCredits2 = () => {
   const [visible, setVisible] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlanType>();
   const [options, setOptions] = useState<string>();
-  // const [locationLoading, setLocationLoading] = useState<boolean>(false)
   const [location, setLocation] = useState<string>('')
 
   const [indiaPayment, setIndiaPayment] = useState<PaymentInIndiaData>({
@@ -53,17 +52,7 @@ const LeadCourtCredits2 = () => {
 
   const handlePaymentPlan = async (planType: PaymentPlanType) => {
     if (location.toUpperCase() !== 'IN') {
-      // console.log('In iN', planType);
-      // const payload = {
-      //   amount: planType.amount,
-      //   subscriptionType: planType.plan,
-      // }
-      
-      // await makePayment(payload).then(res=>{
-      //   console.log('res', res.data);
-        
-      // })
-
+    
       const setIndiaPay ={
         location : 'IN',
         display: true,
@@ -71,11 +60,8 @@ const LeadCourtCredits2 = () => {
         subscriptionType: planType.plan,
       }
       setIndiaPayment(setIndiaPay)
-      // console.log('payload in India', location, setIndiaPay);
 
     } else {
-      console.log('payload in not india',location );
-      
       setVisible(true);
       setPaymentPlan(planType);
     }
@@ -87,18 +73,14 @@ const LeadCourtCredits2 = () => {
   };
 
   const getUserLocation = async () => {
-    // setLocationLoading(true)
 
     await getLocation().then((res)=>{
       setLocation(res?.data?.country)
-      console.log('location', res?.data?.country);
     }).catch(()=>{
     })
-    // setLocationLoading(false)
 
   }
 
-  // Update price whenever credit amount changes
   useEffect(() => {
     setTotalPrice(calculatePrice(creditAmount));
   }, [creditAmount]);
@@ -450,7 +432,6 @@ const LeadCourtCredits2 = () => {
               header="Payment Options"
               visible={visible}
               className="p-2 bg-white w-full max-w-[400px] lg:w-1/2"
-              // style={{ maxWidth: "400px" }}
               onHide={() => {
                 if (!visible) return;
                 setVisible(false);
@@ -529,16 +510,4 @@ const LeadCourtCredits2 = () => {
 };
 
 export default LeadCourtCredits2;
-
-// export default function BuyCredit() {
-//   return (
-//     <div className="p-5">
-
-//       <div className="mb-5">
-//         <h3 className="text-xl font-bold">Choose a plan</h3>
-//         <p className="text-sm text-gray-400">Choose the perfect plan for your business needs.</p>
-//       </div>
-
-//     </div>
-//   )
-// }
+ 

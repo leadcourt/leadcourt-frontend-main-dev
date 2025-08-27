@@ -3,7 +3,6 @@ import authBG from '../../assets/background/bg_gradient.jpg'
 import { useRecoilValue } from "recoil";
 import { accessTokenState, refreshTokenState, userState } from "../../utils/atom/authAtom";
 import logo from "../../assets/logo/logoDark.png";
-import { useEffect } from "react";
 
 
 export default function DefaultLayout() {
@@ -17,14 +16,7 @@ export default function DefaultLayout() {
     access: accessToken,
     token: refreshToken
   }
-
-   useEffect(()=>{
-
-     console.log('DefaultLayout')
-     console.log(user);
-     
-   })
-
+ 
   return (
     <div>
       {/* {auth?.access && user.email === 'customer' ? ( */}

@@ -33,7 +33,6 @@ import { toast } from "react-toastify";
   const resendVerification = async () => {
     setLoading(true);
     setAction("resendOTP");
-    console.log("show");
 
     if (authUser) {
       await sendEmailVerification(authUser);
@@ -48,7 +47,6 @@ import { toast } from "react-toastify";
 
   const reloadUser = async () => {
     setAction("reload");
-    console.log("In the reload");
     setLoading(true);
 
     if (mode === "verifyEmail") {  
@@ -66,7 +64,6 @@ import { toast } from "react-toastify";
           verify: true,
         };
 
-        console.log(auth?.currentUser);
         toast.success("Your account is now verified");
 
         setUser(payload);

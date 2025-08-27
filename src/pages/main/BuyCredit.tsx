@@ -34,7 +34,6 @@ const BuyCredit = () => {
   const [annualSub, setAnnualSub] = useState<boolean>(false);
 
   const [creditAmount, setCreditAmount] = useState<number>(10000);
-  // const [totalPrice, setTotalPrice] = useState<number>();
   const [visible, setVisible] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlanType>();
   const [options, setOptions] = useState<string>();
@@ -46,27 +45,7 @@ const BuyCredit = () => {
     amount: 0,
     subscriptionType: "",
   });
-
-  // const sub_price = [
-  //   {
-  //     starter: 1720,
-  //     pro: 5161,
-  //     business: 8602,
-  //     custom: 0,
-  //     currency: "₹",
-  //   },
-  //   {
-  //     starter: 20,
-  //     pro: 60,
-  //     business: 100,
-  //     custom: 0,
-  //     currency: "$",
-  //   },
-  // ];
-  // const [paymentAmount, setPaymentAmount] = useState<CountryAmount>(
-  //   sub_price[1]
-  // );
-  // Calculate price based on credits (at $10 per 1000 credits)
+ 
 const [countryCurrency, setCountryCurrency] = useState({
       rate: 1,
       currency:"usd",
@@ -90,7 +69,6 @@ const [countryCurrency, setCountryCurrency] = useState({
 
   const checkUrlSearchParams = () => {
     const status = urlSearchParams?.get("status");
-    console.log(urlSearchParams?.get("method"));
     if (status === "failed") {
       setPaymentStatus(true);
     }
@@ -105,15 +83,8 @@ const [countryCurrency, setCountryCurrency] = useState({
       return Math.round((credits / 1000) * (currencyConverter[1].rate*10));
     }
   };
-
-  // Update price when credit amount changes
-  // const handleCreditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const creditValue = parseInt(e.target.value);
-  //   setCredcitAmount(creditValue);
-  // };
-
+ 
   const handlePaymentPlan = async (planType: PaymentPlanType) => {
-    // if (true) {
     if (location?.toUpperCase() === "IN") {
       const setIndiaPayload: PaymentInIndiaData = {
         location: "IN",
@@ -122,9 +93,7 @@ const [countryCurrency, setCountryCurrency] = useState({
         subscriptionType: planType.plan,
       };
       setIndiaPayment(setIndiaPayload);
-    } else {
-      // For non-India payments, set the payment plan and show the dialog
-      // console.log("payload in not india", location);
+    } else { 
 
       setVisible(true);
       setPaymentPlan(planType);
@@ -150,13 +119,7 @@ const [countryCurrency, setCountryCurrency] = useState({
   useEffect(() => {
     checkLocation();
     checkUrlSearchParams();
-    // setTotalPrice(calculatePrice(10000))
   }, []);
-
-  // Update price whenever credit amount changes
-  // useEffect(() => {
-  //   // setTotalPrice(calculatePrice(creditAmount));
-  // }, [creditAmount, location]);
 
   return (
     <div className="min-h-screen w-full p-5 ">
@@ -333,7 +296,6 @@ const [countryCurrency, setCountryCurrency] = useState({
                     handlePaymentPlan({
                       userId: user?.id,
                       plan: planItem.name.toUpperCase(),
-                      // {.currency} {paymentAmount.starter}
                       amount: parseInt(planItem.dollar_amount) * countryCurrency.rate,
                       credit: planItem.credits,
                     })
@@ -354,7 +316,6 @@ const [countryCurrency, setCountryCurrency] = useState({
               header="Payment Options"
               visible={visible}
               className="p-2 bg-white w-full max-w-[400px] lg:w-1/2"
-              // style={{ maxWidth: "400px" }}
               onHide={() => {
                 if (!visible) return;
                 setVisible(false);
@@ -439,16 +400,3 @@ const [countryCurrency, setCountryCurrency] = useState({
 };
 
 export default BuyCredit;
-
-// export default function BuyCredit() {
-//   return (
-//     <div className="p-5">
-
-//       <div className="mb-5">
-//         <h3 className="text-xl font-bold">Choose a plan</h3>
-//         <p className="text-sm text-gray-400">Choose the perfect plan for your business needs.</p>
-//       </div>
-
-//     </div>
-//   )
-// }

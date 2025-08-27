@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteAList, getAllList, renameAList } from "../../utils/api/data";
 import { useNavigate } from "react-router-dom";
-// import { TieredMenu } from "primereact/tieredmenu";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../utils/atom/authAtom";
 import { Skeleton } from "primereact/skeleton";
@@ -50,13 +49,11 @@ export default function ListPage() {
   };
 
   const renameList = async () => {
-    console.log("listName", listName);
 
     const payload = {
       oldName: oldListName,
       newName: listName,
     };
-    console.log("payload", payload);
 
     if (oldListName == listName) {
       toast.info("No changes made to list name");
@@ -65,7 +62,6 @@ export default function ListPage() {
     await renameAList(payload).then((res) => {
       if (res?.data?.message?.endsWith("renamed successfully")) {
         toast.success(res?.data?.message);
-        // navigate(`/list/${listName}/details`);
         setRenameListAction(false);
         allList();
       }
@@ -97,7 +93,6 @@ export default function ListPage() {
         header={`Rename List`}
         visible={renameListAction}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           setRenameListAction(!renameListAction);
         }}
@@ -134,7 +129,6 @@ export default function ListPage() {
         header={`Delete List`}
         visible={deleteListAction}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           setDeleteListAction(!deleteListAction);
         }}
@@ -197,7 +191,6 @@ export default function ListPage() {
           </div>
         </div>
       ) : existingList?.length ? (
-        // ) : allListDisplay.length ? (
 
         <div className="p-10">
           <div className="p-5 my-5 rounded-2xl text-gray-500 bg-gray-50">
@@ -211,12 +204,10 @@ export default function ListPage() {
               <div
                 key={index}
                   className="border2 border-gray-200  cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-100  rounded-lg"
-                // className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 shadow2xl shadow-gray-200 bg-gray-200 hover:bg-red-50  rounded-lg"
               >
                 <div className="flex h-fit items-center justify-between">
                   <div
                     onClick={() =>
-                      // navigate(`/list/${item.name.replace(/\s+/g, "-")}/details`)
                       navigate(`/list/${item?.name}/details`)
                     }
                     className="border-dashed border-r-2 border-r-gray-50 hover:p-[1.3rem] p-5 w-[75%]"

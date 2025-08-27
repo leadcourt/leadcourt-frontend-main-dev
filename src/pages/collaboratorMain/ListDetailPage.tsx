@@ -36,7 +36,6 @@ interface RevealedProfile {
 }
 
 interface ListDetailPayload {
-  // userId: string | undefined;
   page: number | undefined;
   listName: string | undefined;
 }
@@ -148,10 +147,7 @@ export default function Collab_ListDetailPage() {
           .catch(() => {});
       }
     });
-
-    // } catch (err) {
-
-    // }
+ 
 
     setLoadRow({});
   };
@@ -175,7 +171,7 @@ export default function Collab_ListDetailPage() {
 
         prevEntries = entries.map((entry: any) =>
           entry.row_id === id
-            ? { ...entry, ...res?.data.results[0] } // Update the Phone or Email field
+            ? { ...entry, ...res?.data.results[0] }
             : entry
         );
 
@@ -188,11 +184,9 @@ export default function Collab_ListDetailPage() {
         setEntries(prevEntries);
       })
       .catch(() => {
-        // console.log("err occured in show phone or email", err);
       });
 
     setLoadRow({});
-    // loadData(pageNumber);
   };
 
   const openLinkedInPopup = async (id: any) => {
@@ -315,10 +309,6 @@ export default function Collab_ListDetailPage() {
     if (exportOptions.toLowerCase() === "hubspot") {
       await exportToHubspotApi(payload)
         .then((res) => {
-          console.log("response from hubspot export", res);
-          // data :
-          //   portalId: 242990985
-          //   success: true
           if (res?.data?.success) {
             toast.success("Exported to Hubspot successfully");
             window.open(
@@ -347,7 +337,6 @@ export default function Collab_ListDetailPage() {
     setLoading(true);
 
     const payload: ListDetailPayload = {
-      // userId: user?.id,
       page: pageNum,
       listName: params?.listName,
     };
@@ -363,7 +352,6 @@ export default function Collab_ListDetailPage() {
         setEntries(data);
       })
       .catch(() => {
-        // console.log("Error occurred: ", err);
       });
 
     setLoading(false);
@@ -434,7 +422,6 @@ export default function Collab_ListDetailPage() {
   };
 
    useEffect(() => {
-    // checkPhone(entries);
 
     checkSelectedPhone(selectedProfile);
   }, [creditInfo]);
@@ -449,7 +436,6 @@ export default function Collab_ListDetailPage() {
         header={`Insufficient Credit`}
         visible={visible && insufficientCredit === "Insufficient credit"}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -486,7 +472,6 @@ export default function Collab_ListDetailPage() {
         header={`Export to ${TextToCapitalize(exportOptions)}`}
         visible={visible && exportOptions.length > 0}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -654,13 +639,11 @@ export default function Collab_ListDetailPage() {
         {loading ? (
           <DataTable
             value={Array(10).fill(loadingColumns)}
-            // filters={filters}
             globalFilterFields={fields}
             tableStyle={{ minWidth: "100%" }}
             dataKey="row_id"
                   scrollable 
                   scrollHeight="64vh" 
-            // paginator
             className="text-sm rounded-lg overflow-hidden"
             rows={50}
             selectionMode={rowClick ? null : "checkbox"}
@@ -684,7 +667,6 @@ export default function Collab_ListDetailPage() {
                     ? "font-bold text-gray-700"
                     : "text-gray-500"
                 }  `}
-                // body={col.field}
                 body={
                   col.field === "Phone"
                     ? skeletonLoad
@@ -710,7 +692,6 @@ export default function Collab_ListDetailPage() {
                     ? skeletonLoad
                     : null
                 }
-                // body={col.field === "Phone" ? showPhone : ''}
                 header={col.header}
                 headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
               />
@@ -725,7 +706,6 @@ export default function Collab_ListDetailPage() {
               dataKey="row_id"
                   scrollable 
                   scrollHeight="70vh"  
-              // paginator
               className="text-sm rounded-lg overflow-hidden"
               rows={50}
               selectionMode={rowClick ? null : "checkbox"}
@@ -749,7 +729,6 @@ export default function Collab_ListDetailPage() {
                       ? "font-bold text-gray-700"
                       : "text-gray-500"
                   }  `}
-                  // body={col.field}
                   body={
                     col.field === "Phone"
                       ? showPhone
@@ -773,7 +752,6 @@ export default function Collab_ListDetailPage() {
                       ? showOrgIndustry
                       : null
                   }
-                  // body={col.field === "Phone" ? showPhone : ''}
                   header={col.header}
                   headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                 />

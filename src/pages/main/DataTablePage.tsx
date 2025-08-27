@@ -2,12 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
-// import { TieredMenu } from "primereact/tieredmenu";
-// import { useNavigate } from "react-router-dom";
 import { getAllData, getLinkedInUrl } from "../../utils/api/data";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-// import { MultiSelect } from "primereact/multiselect";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { creditState, userState } from "../../utils/atom/authAtom";
 import { toast } from "react-toastify";
@@ -22,7 +19,6 @@ import { debounce } from "lodash";
 import { Dropdown } from "primereact/dropdown";
 import { useNavigate } from "react-router-dom";
 
-// import FilterComponent from "../../component/FilterComponent";
 
 interface Person {
   City: string;
@@ -43,7 +39,6 @@ interface LoadDataOptions {
 export default function DataTablePage() {
   const creditInfo = useSetRecoilState(creditState);
   const creditInfoValue = useRecoilValue(creditState);
-  // const [creditInfo, setCreditInfo] = useRecoilState(creditState)
 
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [entries, setEntries] = useState([]);
@@ -67,8 +62,6 @@ export default function DataTablePage() {
   const r_Limit: number[] = [25, 50, 100];
 
   const changeRowLimit = (value: any) => {
-    console.log("value", value);
-    console.log("typeof(value)", typeof value);
     setSelectedRowLimit(value);
     loadData(pageNumber, { rowLimit: value });
   };
@@ -135,42 +128,13 @@ export default function DataTablePage() {
         setTotalDataCount(res?.data?.count);
         setEntries(data);
       } catch (error) {
-        console.error("Fetch failed", error);
+        console.error("Fetch failed");
       } finally {
         setLoading(false);
       }
     }, 2000)
   ).current;
-
-  // const loadData = useRef(async (pageNo: number, filter?: any) => {
-  //   setLoading(true);
-  //   const payload = {
-  //     filters: filter ?? selectedFilters,
-  //     page: pageNo,
-  //     userId: user?.id,
-  //   };
-  //   console.log(' in the load data');
-
-  //   debounce( async ()=> {
-  //     console.log('In debouncer');
-
-  //   await getAllData(payload)
-  //     .then((res) => {
-  //       const data = res?.data?.cleaned?.sort((a: Person, b: Person): number =>
-  //         a.Name.localeCompare(b.Name)
-  //       );
-  //       setTotalDataCount(res?.data?.count);
-
-  //       setEntries(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setLoading(false);
-  //     })}, 2000);
-
-  //   setLoading(false);
-
-  // }).current;
+ 
 
   const loadData = useCallback(
     (pageNo: number, { rowLimit, filter }: LoadDataOptions = {}) => {
@@ -178,7 +142,6 @@ export default function DataTablePage() {
       const payload = {
         filters: filter ?? selectedFilters,
         page: pageNo,
-        // userId: user?.id,
         limit: rowLimit ?? selectedRowLimit,
       };
       debouncedFetchData(payload);
@@ -208,7 +171,6 @@ export default function DataTablePage() {
 
     await showPhoneAndEmail(type, [id], user)
       .then((res) => {
-        console.log(",,,res in res", res);
 
         if (res?.data?.error) {
           setVisible(true);
@@ -217,7 +179,7 @@ export default function DataTablePage() {
 
         prevEntries = entries.map((entry: any) =>
           entry.row_id === id
-            ? { ...entry, ...res?.data.results[0] } // Update the Email field
+            ? { ...entry, ...res?.data.results[0] }
             : entry
         );
 
@@ -230,8 +192,7 @@ export default function DataTablePage() {
 
         setEntries(prevEntries);
       })
-      .catch((err) => {
-        console.log("res in res,,,", err);
+      .catch(() => {
       });
 
     setLoadRow({});
@@ -385,7 +346,6 @@ export default function DataTablePage() {
         header={`Insufficient Credit`}
         visible={visible}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -450,7 +410,6 @@ export default function DataTablePage() {
                 <Dialog
                   header="Add Profiles to list"
                   visible={modalVisible}
-                  // style={{ minWidth: "50vw" }}
                   className="p-2 bg-white w-[90vw] lg:w-1/2"
                   onHide={() => {
                     if (!modalVisible) return;
@@ -467,12 +426,10 @@ export default function DataTablePage() {
                 <Button
                   label="Add to list"
                   icon="pi pi-plus"
-                  // items={selectedUser}
                   onClick={() => addToList()}
                   className="flex gap-3 border border-gray-500 text-sm focus:outline-none text-gray-500 hover:bg-gray-500 hover:text-white  transition-colors duration-200 w-full lg:min-w-fit py-3 px-4 cursor-pointer font-medium rounded-md"
                 ></Button>
                 <div
-                  // onClick={() => navigate("/user/new")}
                   className="secondary-btn-red w-full lg:min-w-fit flex justify-center gap-5"
                 >
                   {/* <i className="pi pi-plus"></i> */}
@@ -492,7 +449,6 @@ export default function DataTablePage() {
                   dataKey="row_id"
                   scrollable 
                   scrollHeight="70vh" 
-                  // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}
                   selectionMode={rowClick ? null : "checkbox"}
@@ -516,7 +472,6 @@ export default function DataTablePage() {
                           ? "font-bold text-gray-700"
                           : "text-gray-500"
                       }  `}
-                      // body={col.field}
                       body={
                         col.field === "Phone"
                           ? skeletonLoad
@@ -542,7 +497,6 @@ export default function DataTablePage() {
                           ? skeletonLoad
                           : null
                       }
-                      // body={col.field === "Phone" ? showPhone : ''}
                       header={col.header}
                       headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                     />
@@ -557,9 +511,7 @@ export default function DataTablePage() {
                   dataKey="row_id"
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
-                  // scrollHeight="400px" 
                   scrollHeight="70vh" 
-                  // paginator
                   className=" text-sm rounded-lg overflow-hidden"
                   rows={50}
                   selectionMode={rowClick ? null : "checkbox"}
@@ -579,7 +531,6 @@ export default function DataTablePage() {
                       key={col.field}
                       field={col.field}
                       className={`text-xs border-b border-gray-100 text-gray-500 p-1 `}
-                      // body={col.field}
                       body={
                         col.field === "Phone"
                           ? showPhone
@@ -603,7 +554,6 @@ export default function DataTablePage() {
                           ? showOrgIndustry
                           : null
                       }
-                      // body={col.field === "Phone" ? showPhone : ''}
                       header={col.header}
                       headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                     />
@@ -644,7 +594,6 @@ export default function DataTablePage() {
                   type="number"
                   value={pageNumber}
                   max={totalDataCount}
-                  // disabled
                   className="max-w-[100px] text-center order py-2 focus:outline-gray-100 focus:outline-1 rounded"
                   onChange={(e) => handleChangePageNumber(e)}
                 />

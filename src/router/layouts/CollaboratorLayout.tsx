@@ -6,8 +6,6 @@ import {
   userState,
 } from "../../utils/atom/authAtom";
 import { useState } from "react";
-// import Sidebar from "../../component/Sidebar";
-// import Topbar from "../../component/Topbar";
 import ScrollButtons from "../../component/ScrollButtons";
 import CollaboratorSidebar from "../../component/collaborator/CollaboratorSidebar";
 import CollaboratorTopbar from "../../component/collaborator/CollaboratorTopbar";
@@ -88,17 +86,4 @@ export default function CollaboratorLayout() {
       )}
     </div>
   );
-  // return (
-  //   <div className="">
-  //     {auth?.access && user?.email !== null ?
-
-  //         <div>
-  //           <Outlet />
-  //         </div>
-  //         :
-  //         <Navigate to=''/>
-  //     }
-  //   </div>
-
-  // )
 }

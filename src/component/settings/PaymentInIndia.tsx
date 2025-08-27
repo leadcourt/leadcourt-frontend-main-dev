@@ -59,7 +59,6 @@ const PaymentInIndia = ({ paymentData }: any) => {
  
       } else {
         toast.error("Payment failed, please try again!");
-        console.error("Payment failed", res.data);
       }
     });
   };

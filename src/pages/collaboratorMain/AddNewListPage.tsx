@@ -23,14 +23,12 @@ export default function Collab_AddnewListPage() {
 
     
     await collaboration_createNewList_api(payload)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         
         toast.success("List created successfully");
         navigate(`/collaboration/${collab?._id}/list`);
       })
       .catch((err) => {
-        console.log(err.response);
         
         toast.error(err.response.data.error);
       });

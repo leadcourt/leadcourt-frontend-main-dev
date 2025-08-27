@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   exportList,
   getLinkedInUrl,
-  // getDataPhoneAndEmail,
   getSingleListDetail,
 } from "../../utils/api/data";
 import { DataTable } from "primereact/datatable";
@@ -149,11 +148,6 @@ export default function ListDetailPage() {
           .catch(() => {});
       }
     });
-
-    // } catch (err) {
-
-    // }
-
     setLoadRow({});
   };
 
@@ -190,11 +184,9 @@ export default function ListDetailPage() {
         setEntries(prevEntries);
       })
       .catch(() => {
-        // console.log("err occured in show phone or email", err);
       });
 
     setLoadRow({});
-    // loadData(pageNumber);
   };
 
   const openLinkedInPopup = async (id: any) => {
@@ -308,8 +300,6 @@ export default function ListDetailPage() {
   };
 
   const exportCurrentList = async () => {
-    // setExportLoading(true);
-
     const payload: any = {
       listName: params?.listName,
     };
@@ -317,10 +307,6 @@ export default function ListDetailPage() {
     if (exportOptions.toLowerCase() === "hubspot") {
       await exportToHubspotApi(payload)
         .then((res) => {
-          console.log("response from hubspot export", res);
-          // data :
-          //   portalId: 242990985
-          //   success: true
           if (res?.data?.success) {
             toast.success("Exported to Hubspot successfully");
             window.open(
@@ -333,20 +319,12 @@ export default function ListDetailPage() {
         .catch(() => {});
       } else if (exportOptions.toLowerCase() === "zoho"){
         await exportToZohoApi(payload).then((res)=>{
-          console.log("response from hubspot export", res);
 
           if (res?.data?.success) {
             toast.success("Exported to Zoho successfully");
-            // window.open(
-            //   `https://app-na2.hubspot.com/import/${res?.data?.portalId}`,
-            //   "_blank",
-            //   "noopener,noreferrer"
-            // );
-
           } 
 
         }).catch(()=>{
-          console.log('After all function in error response', exportLoading)
             toast.info("Error occured while exporting");
           
         })
@@ -388,7 +366,6 @@ export default function ListDetailPage() {
         setEntries(data);
       })
       .catch(() => {
-        // console.log("Error occurred: ", err);
       });
 
     setLoading(false);
@@ -460,8 +437,6 @@ export default function ListDetailPage() {
  
 
   useEffect(() => {
-    // checkPhone(entries);
-
     checkSelectedPhone(selectedProfile);
   }, [creditInfo]);
 
@@ -475,7 +450,6 @@ export default function ListDetailPage() {
         header={`Insufficient Credit`}
         visible={visible && insufficientCredit === "Insufficient credit"}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -511,7 +485,6 @@ export default function ListDetailPage() {
         header={`Export to ${TextToCapitalize(exportOptions)}`}
         visible={visible && exportOptions.length > 0}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -692,13 +665,11 @@ export default function ListDetailPage() {
         {loading ? (
           <DataTable
             value={Array(10).fill(loadingColumns)}
-            // filters={filters}
             globalFilterFields={fields}
             tableStyle={{ minWidth: "100%" }}
             dataKey="row_id"
                   scrollable 
                   scrollHeight="70vh"
-            // paginator
             className="text-sm rounded-lg overflow-hidden"
             rows={50}
             selectionMode={rowClick ? null : "checkbox"}
@@ -722,7 +693,6 @@ export default function ListDetailPage() {
                     ? "font-bold text-gray-700"
                     : "text-gray-500"
                 }  `}
-                // body={col.field}
                 body={
                   col.field === "Phone"
                     ? skeletonLoad
@@ -748,7 +718,6 @@ export default function ListDetailPage() {
                     ? skeletonLoad
                     : null
                 }
-                // body={col.field === "Phone" ? showPhone : ''}
                 header={col.header}
                 headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
               />
@@ -763,7 +732,6 @@ export default function ListDetailPage() {
               dataKey="row_id"
                   scrollable 
                   scrollHeight="70vh" 
-              // paginator
               className="text-sm rounded-lg overflow-hidden"
               rows={50}
               selectionMode={rowClick ? null : "checkbox"}
@@ -787,7 +755,6 @@ export default function ListDetailPage() {
                       ? "font-bold text-gray-700"
                       : "text-gray-500"
                   }  `}
-                  // body={col.field}
                   body={
                     col.field === "Phone"
                       ? showPhone
@@ -811,16 +778,10 @@ export default function ListDetailPage() {
                       ? showOrgIndustry
                       : null
                   }
-                  // body={col.field === "Phone" ? showPhone : ''}
                   header={col.header}
                   headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                 />
-              ))}
-              {/* <Column
-                    body={actionBodyTemplate}
-                    className="border-b"
-                    header="Actions"
-                  /> */}
+              ))} 
             </DataTable>
           </div>
         )}

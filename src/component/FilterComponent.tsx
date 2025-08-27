@@ -193,11 +193,9 @@ export default function FilterComponent({
     let searchQuery;
     if (selectedFilterValue["Designation"]) {
       searchQuery = selectedFilterValue["Designation"]?.toLowerCase();
-      console.log("select all searchQuery", searchQuery);
     } else {
       setSelectedFilterValue({ ...selectedFilterValue, Designation: "" });
       searchQuery = "";
-      console.log("not select all searchQuery", searchQuery);
     }
 
     const filterValues = designations.filter((options: any) =>
@@ -208,19 +206,12 @@ export default function FilterComponent({
 
     if (selectAllDesignation) {
       setSelectedFilters({ ...selectedFilters, Designation: [] });
-      console.log(" click select all searchQuery", searchQuery, {
-        ...selectedFilters,
-        Designation: [],
-      });
+      
     } else {
       setSelectedFilters({
         ...selectedFilters,
         Designation: [...allDesignationData, ...filterValues],
-      });
-      console.log("unclick select all searchQuery", searchQuery, {
-        ...selectedFilters,
-        Designation: [],
-      });
+      }); 
     }
 
     setSelectAllDesignation(!selectAllDesignation);

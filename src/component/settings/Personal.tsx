@@ -137,7 +137,6 @@ const PersonalInformationPage: React.FC = () => {
         phone: res?.phone_number ?? ''
       })
 
-      console.log(res);
       
       
       setData({

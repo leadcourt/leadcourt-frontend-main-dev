@@ -4,9 +4,6 @@ import { jwtDecode } from 'jwt-decode';
 import { atom, selector } from 'recoil';
 import axios from 'axios';
 import { collabProjectState } from './collabAuthAtom';
-// import CryptoJS from 'crypto-js'; 
-
-
 export interface User {
   id: string;
   email: string;
@@ -37,7 +34,6 @@ const cookieStorage = (keyPrefix = '') => ({
     Cookies.set(`${keyPrefix}${key}`, value, {
       expires: key.includes('refresh') ? 30 : 1,
       secure: true,
-      // sameSite: null,
       sameSite: 'strict',
     });
   },
@@ -100,10 +96,7 @@ export const attachToken = selector({
 
       return axios.interceptors.request.use(function (config) {
         const token = acc_token;
-          
-      // const bytes = CryptoJS.AES.decrypt(token, import.meta.env.VITE_EN_KEY);
-      // const decryptedToken = bytes.toString(CryptoJS.enc.Utf8); 
-
+           
         const decodedToken = jwtDecode<any>(acc_token);
         const dateNow = new Date();
         
@@ -112,7 +105,6 @@ export const attachToken = selector({
         }
         config.headers.Authorization = `Bearer ${token}`;
         if (collab_token) {
-          // console.log("collab_token", collab_token?._id, collab_token);
           config.headers['X-Collab-ID'] = collab_token?._id;
         }
         

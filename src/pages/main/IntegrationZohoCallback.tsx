@@ -2,14 +2,11 @@ import { useState, useEffect } from "react";
 import {
   connectionZohoCRM,
   disconnetZohoCRMCode,
-  // disconnetHubspotCRMCode,
-  // postHubspotCRMCode,
   postZohoCRMCode,
 } from "../../utils/api/crmIntegrations";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import hubspotLogo from "../../assets/integrations/hubspot/HubSpot.png";
 import { toast } from "react-toastify";
-// import { toast } from "react-toastify";
 
 const IntegrationZohoCallback = () => {
   const [status, setStatus] = useState<"processing" | "success" | "error">(
@@ -31,7 +28,6 @@ const IntegrationZohoCallback = () => {
       // Get the authorization code from URL search params
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get("code");
-      // const state = urlParams.get('state');
       const error = urlParams.get("error");
 
       // Check for OAuth errors
@@ -53,35 +49,28 @@ const IntegrationZohoCallback = () => {
         return;
       }
 
-      console.log('theres codee', urlParams);
       
       // Send code to backend
       await postZohoCRMCode({ code: qy })
         .then((response) => {
-          console.log("zoho code response:", response.data);
 
           if (response.status === 200) {
-            // console.log('Integration successful:', response.data);
             setStatus("success");
           } else {
             setStatus("error");
             setErrorMessage("Failed to complete integration");
           }
-          // toast.success('Zoho code sent successfully!');
         })
         .catch(() => {
             setStatus("error");
         });
     } catch (error) {
-      console.error("Callback processing error:", error);
       setStatus("error");
       setErrorMessage("An unexpected error occurred");
     }
   };
 
   useEffect(() => {
-    console.log("navigationState", navigationState);
-
     processCallback();
   }, []);
 

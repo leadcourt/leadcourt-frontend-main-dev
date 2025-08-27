@@ -49,30 +49,24 @@ const Collab_IntegrationCallback = ( ) => {
 
         // Send code to backend
         await postHubspotCRMCode({code: qy}).then((response) => {
-            console.log('Hubspot code response:', response.data);
 
             if (response.status === 200) {
-                // console.log('Integration successful:', response.data);
                 setStatus('success');
             } else {
                 setStatus('error');
                 setErrorMessage('Failed to complete integration');
             }
-            // toast.success('Hubspot code sent successfully!');
         }
         ).catch(( ) => {
         })
 
     } catch (error) {
-      console.error('Callback processing error:', error);
       setStatus('error');
       setErrorMessage('An unexpected error occurred');
     }
   };
 
   useEffect(() => {
-    console.log('navigationState', navigationState);
-    
     processCallback();
   }, []);
 

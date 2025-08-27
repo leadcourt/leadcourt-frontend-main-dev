@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import { firebaseAuth } from "../../config/firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import axios from "axios";
-// import CryptoJS from "crypto-js";
 
 interface UserInput {
   email: string;
@@ -44,11 +43,7 @@ const userSignUp = async (
     })
     .catch((error) => {
       const errorCode = error.code;
-      // const errorMessage = error.message;
-      // console.log('error', error);
-      // console.log('errorCode', errorCode);
-      // console.log('errorMessage', errorMessage);
-
+ 
       if (errorCode === "auth/email-already-in-use") {
         return "Email already in use.";
       } else {
@@ -73,23 +68,8 @@ const userLogin = async (
     const user = response.user;
     const userVerified = response.user.emailVerified;
     const accessToken = await user.getIdToken();
-    // const refreshToken = user.refreshToken;
-    // const encData = import.meta.env.VITE_EN_KEY
-
-    // const key = CryptoJS.enc.Base64.parse(encData);
-
-    // const refresh = await firebaseAuth.currentUser
-    //   ?.getIdToken(true)
-    //   .then((res) => {
-    //     return res;
-    //   }).catch(()=>{
-    //     return accessToken});
-
-    // const en_access = CryptoJS.AES.encrypt(accessToken, encData).toString();
-    console.log('userVerified', userVerified );
-
+ 
     data = {
-      // access: en_access,
       access: accessToken,
       refresh: 'refreshToken',
       user: {
@@ -126,21 +106,12 @@ const userGoogleSignIn = async () => {
     const result: any = await signInWithPopup(firebaseAuth, provider);
     const credential = GoogleAuthProvider.credentialFromResult(result);
 
-    // const token = credential?.idToken;
     const user = result.user;
 
     const userIdToken = await user.getIdToken();
 
-    // For token encryption
-    // const en_access = CryptoJS.AES.encrypt(
-    //   token,
-    //   import.meta.env.VITE_EN_KEY
-    // ).toString();
-
-
     if (credential) {
       data = {
-        // access: en_access,
         access: userIdToken,
         refresh: "",
         user: {
@@ -156,10 +127,7 @@ const userGoogleSignIn = async () => {
     return data;
   } catch (error: any) {
     const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    // const email = error.customData.email;
-    // The AuthCredential type that was used.
+    const errorMessage = error.message; 
     const credentialError = GoogleAuthProvider.credentialFromError(error);
 
     if (credentialError || errorCode || errorMessage) {

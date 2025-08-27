@@ -5,8 +5,6 @@ import {
   refreshTokenState,
   userState,
 } from "../../utils/atom/authAtom";
-import { useEffect } from "react";
-
 
 export default function AuthLayout() {
   const accessToken = useRecoilValue(accessTokenState);
@@ -17,11 +15,6 @@ export default function AuthLayout() {
     access: accessToken,
     token: refreshToken,
   };
-
-  useEffect(() => {
-    console.log("AuthLayout");
-    console.log(user);
-  });
 
   return (
     <div>

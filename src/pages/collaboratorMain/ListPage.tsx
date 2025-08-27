@@ -1,23 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { TieredMenu } from "primereact/tieredmenu";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../utils/atom/authAtom";
 import { Skeleton } from "primereact/skeleton";
 import { collaboration_getAllList_api } from "../../utils/api/collaborationData";
-// import { getAllDash } from "../../utils/api/collaborationAPI";
 import { collabProjectState } from "../../utils/atom/collabAuthAtom";
-
-// interface ListType {
-//   name: string;
-//   total: number;
-// }
+ 
 export default function Collab_ListPage() {
   const navigate = useNavigate();
   const user = useRecoilValue(userState);
   const [loading, setLoading] = useState(false);
   const [existingList, setExistingList] = useState<any>([]);
-  // const [existingList, setExistingList] = useState<ListType[]>([]);
   const collabProject = useRecoilValue(collabProjectState);
  
   const allList = async () => {
@@ -36,19 +29,10 @@ export default function Collab_ListPage() {
     setLoading(false);
   };
  
-  
-  // const getDash = async () => {
-  //   console.log("Collab Project:", collabProject);
-  //       await getAllDash().then((res) => {
-  //         console.log("Dashboard Data:", res?.data);
-  //       })
-  // }
+   
  
   useEffect(() => {
     allList();
-    // console.log(collabProject);
-    
-
   }, []);
   
   return (
@@ -75,7 +59,6 @@ export default function Collab_ListPage() {
           </div>
         </div>
       ) : existingList.length ? (
-      // ) : allListDisplay.length ? (
         
       <div className="p-10 border border-gray-200 ">
       <div className="p-5 my-5 rounded-2xl text-gray-500 bg-gray-50">
@@ -86,17 +69,13 @@ export default function Collab_ListPage() {
           <div
             key={index}
             onClick={() =>
-              // navigate(`/list/${item.name.replace(/\s+/g, "-")}/details`)
               navigate(`/collaboration/${collabProject?._id}/list/${item?.name}/details`)
             }
-                            // className="border border-gray-200 cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-200 hover:bg-gray-300  rounded-lg"
 
                   className="border-2 border-gray-200  cursor-pointer transition-all ease-in-out duration-300 hover:shadow-2xl shadow-gray-200 bg-gray-100  rounded-lg"
-            // className="p-5 hover:p-[1.3rem] cursor-pointer transition-transform ease-in-out border bg-red-50 hover:bg-red-100 border-red-100 rounded-lg"
           >
             <div className="flex items-center justify-between">
               <div 
-              // className=""
                     className="border-dashed border-r2 border-r-gray-200 hover:p-[1.3rem] p-5 w-[75%]"
               >
                 <p>

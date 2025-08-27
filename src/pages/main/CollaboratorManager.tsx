@@ -25,14 +25,10 @@ import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import { creditState } from "../../utils/atom/authAtom";
 import { useNavigate } from "react-router-dom";
-// import { useRecoilValue } from 'recoil';
-// import { userState } from '../../utils/atom/authAtom';
-// import formik
 
 interface AddCollaboratorData {
   email: string;
   role: string;
-  // message: string;
 }
 
 interface Collaborator {
@@ -64,8 +60,6 @@ const CollaboratorManager: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // const user = useRecoilValue(userState)
-
   const roleColors = {
     owner: "bg-purple-100 text-purple-800 border-purple-200",
     admin: "bg-red-100 text-red-800 border-red-200",
@@ -91,18 +85,7 @@ const CollaboratorManager: React.FC = () => {
       collaborator.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       collaborator.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  // const handleRoleChange = (
-  //   collaboratorId: string,
-  //   newRole: "admin" | "editor" | "viewer"
-  // ) => {
-  //   setCollaborators(
-  //     collaborators?.map((collab) =>
-  //       collab.id === collaboratorId ? { ...collab, role: newRole } : collab
-  //     )
-  //   );
-  //   setEditingRole(null);
-  // };
+ 
 
   const handleRemoveCollaborator = async (collaboratorId: string) => {
     setLoadingDeleteCollab({
@@ -154,14 +137,12 @@ const CollaboratorManager: React.FC = () => {
   };
 
   const getInvitations = async () => {
-    await getAllInvitations().then((res) => {
-      console.log("There is response:", res?.data);
+    await getAllInvitations().then(() => {
     });
   };
 
   const getCollaborators = async () => {
     await getAllSentInvitations().then((res) => {
-      console.log("Sent Invites:", res?.data);
       const invites = res?.data || [];
 
       const collaboratorsData = invites?.collaborators?.map((invite: any) => ({
@@ -173,25 +154,21 @@ const CollaboratorManager: React.FC = () => {
         avatar: invite.collaboratorName.substring(0, 2).toUpperCase(),
         joinedDate: new Date(invite.invitedAt).toISOString().split("T")[0],
       }));
-      setCollaborators(collaboratorsData); // Assuming the response contains the list of collaborators
+      setCollaborators(collaboratorsData); 
     });
   };
 
   const onSubmit = async (values: AddCollaboratorData) => {
     setLoading(true);
-    console.log("values", values);
 
     try {
       const payload = {
         email: values.email,
-        role_permission: values.role, // for defaulting
-        // message: values.message,
+        role_permission: values.role, 
       };
 
-      console.log("payload", payload);
 
       await inviteUser(payload).then((res) => {
-        console.log(res);
         if (res?.status == 201) {
           toast.success("Invitation sent successfully!");
           setShowInviteModal(false);
@@ -222,12 +199,7 @@ const CollaboratorManager: React.FC = () => {
           );
         }
 
-      });
-      // setInviteData({ email: '', role: 'viewer', message: '' });
-      // setShowInviteModal(false);
-
-      // const res: any = await inviteUser(values.email, values.password)
-
+      }); 
       setLoading(false);
     } catch (err) {
       toast.error("Error Occurred, try again!");
@@ -237,7 +209,6 @@ const CollaboratorManager: React.FC = () => {
   const initialValues: AddCollaboratorData = {
     email: "",
     role: "",
-    // message: "",
   };
 
   const {
@@ -260,7 +231,6 @@ const CollaboratorManager: React.FC = () => {
     getInvitations();
     getCollaborators();
 
-    console.log("creditInfo", creditInfo);
   }, []);
 
   return (
@@ -314,21 +284,7 @@ const CollaboratorManager: React.FC = () => {
                 </option>
               </select>
             </div>
-
-            {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Personal Message (Optional)
-              </label>
-              <textarea
-                name="message"
-                value={values.message}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="Add a personal message to the invitation"
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent"
-              />
-            </div> */}
+ 
           </div>
 
           <div className="flex gap-3 mt-6">
@@ -340,7 +296,6 @@ const CollaboratorManager: React.FC = () => {
             </button>
             <button
               type="submit"
-              // onClick={handleInvite}
               disabled={!isValid || isSubmitting}
               className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 text-white rounded-lg transition-colors flex items-center justify-center gap-2"
             >
@@ -562,17 +517,11 @@ const CollaboratorManager: React.FC = () => {
                           collaborator.status.slice(1)}
                       </span>
                     </td>
-                    {/* <td className="py-4 px-4 text-sm text-gray-500">
-                      {collaborator.lastActive || "Never"}
-                    </td> */}
+       
                     <td className="py-4 px-4">
                       {collaborator.role !== "owner" && (
                         <div className="flex items-center gap-2">
-                          {/* <button
-                            className="text-red-600 hover:text-red-800 p-1 rounded transition-colors"
-                            title="Remove collaborator"
-                          >
-                          </button> */}
+                 
                           <button
                             title="Remove collaborator"
                             onClick={() =>
@@ -585,7 +534,6 @@ const CollaboratorManager: React.FC = () => {
                             ) : (
                               <Trash2 className="w-4 h-4 " />
                             )}
-                            {/* <MoreHorizontal className="w-4 h-4" /> */}
                           </button>
                         </div>
                       )}

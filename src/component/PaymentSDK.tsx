@@ -21,7 +21,6 @@ export const PaymentSDK = () => {
     script.async = true;
     script.onload = () => setLoaded(true);
     script.onerror = () => {
-      console.error("Failed to load the PayPal SDK script.");
       setLoaded(false);
     };
 

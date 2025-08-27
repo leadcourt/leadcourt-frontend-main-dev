@@ -70,8 +70,6 @@ export default function Collab_DataTablePage() {
   const r_Limit: number[] = [25, 50, 100];
 
   const changeRowLimit = (value: any) => {
-    console.log("value", value);
-    console.log("typeof(value)", typeof value);
     setSelectedRowLimit(value);
     loadData(pageNumber, { rowLimit: value });
   };
@@ -139,7 +137,7 @@ export default function Collab_DataTablePage() {
         setTotalDataCount(res?.data?.count);
         setEntries(data);
       } catch (error) {
-        console.error("Fetch failed", error);
+        console.error("Fetch failed");
       } finally {
         setLoading(false);
       }

@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 const baseUrl = import.meta.env.VITE_BE_URL + '/collaboration'
-// const baseUrl = 'https://dev.kyoto-creative.online/api/collaboration'
-
 
 const getAllInvitations = async ( ) => {
     return await axios.get(`${baseUrl}/invitations`);
@@ -37,7 +35,6 @@ const getCollabCreditBalance = async () => {
 }
 
 const getAllDash = async () => {
-    // return await axios.post(`${baseUrl}/dashboard/dashboard`, )
     return
 }
 
