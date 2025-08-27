@@ -12,7 +12,6 @@ interface FormData {
   email: string;
 }
 export default function ForgotPassword() {
-  // const [email, setEmail] = useState('markclarke@gmail.com');
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 

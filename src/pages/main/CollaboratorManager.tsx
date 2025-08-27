@@ -110,11 +110,12 @@ const CollaboratorManager: React.FC = () => {
       collab: collaboratorId,
     });
     await removeCollaboration(collaboratorId).then((res) => {
-      if (res.data.status === 204 ){
+      
+      if (res.status === 204 ){
         setCollaborators(
           collaborators?.filter((collab) => collab.id !== collaboratorId)
         );
-        toast.info('Collaborator is removed successfully!')
+        toast.info('Collaborator removed!')
       }
     }).catch(( )=>{
         toast.info('Unable to removed collaborator!')
@@ -221,7 +222,6 @@ const CollaboratorManager: React.FC = () => {
           );
         }
 
-        console.log("Response:", res);
       });
       // setInviteData({ email: '', role: 'viewer', message: '' });
       // setShowInviteModal(false);

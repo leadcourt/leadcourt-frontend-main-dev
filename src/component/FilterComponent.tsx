@@ -188,12 +188,7 @@ export default function FilterComponent({
   };
 
   const multiSelectRef: any = useRef(null);
-  const handleSelectAll = () => {
-    // const allValues = event.originalEvent.checked ? (multiSelectRef.current?.initialValue || designations) : [];
-
-    // console.log('select all');
-    // console.log('select all designation', designations.length);
-    // console.log('select all button', selectAllDesignation);
+  const handleSelectAll = () => { 
 
     let searchQuery;
     if (selectedFilterValue["Designation"]) {
@@ -204,15 +199,12 @@ export default function FilterComponent({
       searchQuery = "";
       console.log("not select all searchQuery", searchQuery);
     }
-    // console.log('select all searchQuery', searchQuery);
 
     const filterValues = designations.filter((options: any) =>
       options?.toLowerCase()?.includes(searchQuery)
     );
-    // console.log('select all filterValues', filterValues);
 
     const allDesignationData = selectedFilters["Designation"] ?? [];
-    // console.log('select all allDesignationData', allDesignationData);
 
     if (selectAllDesignation) {
       setSelectedFilters({ ...selectedFilters, Designation: [] });
@@ -304,7 +296,6 @@ export default function FilterComponent({
             filterTemplate={getFilterTemplate("Country")}
             selectedItemTemplate={(e) => selectedItemTemplate(e, "Country")}
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
-            // virtualScrollerOptions={{ itemSize: 43 }}
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["Country"]?.length > 0 ? "flex flex-wrap " : ""
             } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
@@ -334,7 +325,6 @@ export default function FilterComponent({
             style={{
               maxWidth: "100%",
             }}
-            // emptyMessage={loadingData === "State"  ? 'Data Loading...' : 'Search for more...'}
             emptyMessage={
               loadingData === "State" ? "Data Loading..." : "Search for more..."
             }
@@ -459,13 +449,7 @@ export default function FilterComponent({
             filterTemplate={getFilterTemplate("Designation")}
             selectedItemTemplate={(e) => selectedItemTemplate(e, "Designation")}
             itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
-            // itemClassName="text-xs text-red-800 flex flex-wrap w-[100%] max-w-[400px] items-center gap-2  bg-red-50 border-b border-b-red-200 p-2 "
-            // className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
-            //   selectedFilters["Designation"]?.length > 0
-            //     ? "flex flex-wrap "
-            //     : ""
-            // } overflow-auto  text-sm shadow border border-gray-200 p-2 md:w-20rem  custom-checkbox-multiselect`}
-
+ 
             className={` p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["Designation"]?.length > 0
                 ? "flex flex-wrap "
@@ -523,7 +507,6 @@ export default function FilterComponent({
             className={`   p-multiselect p-checkbox-box  w-full max-h-[100px] max-w-[100px] ${
               selectedFilters["City"]?.length > 0 ? "flex flex-wrap " : ""
             } overflow-auto  text-sm hover:shadow shadow-3xl border-2 border-gray-300 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
-            // } overflow-auto  text-sm shadow border border-gray-200 hover:border-gray-300 p-2 md:w-20rem  custom-checkbox-multiselect`}
           />
         </div>
 
@@ -653,12 +636,4 @@ export default function FilterComponent({
     </div>
   );
 }
-
-// "ceo - chief investment officer, president and interim chief executive officer"
-// "ceo - executive vice president of strategic planning, chief information officer for cke restaurants"
-// "ceo - chief executive officer"
-// "ceo - president & chief executive officer"
-// "ceo - president, chief executive officer"
-// "ceo - president and chief executive officer"
-
-// hr - human
+ 

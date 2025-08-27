@@ -28,17 +28,12 @@ function Interceptor() {
     resetUser();
     creditInfor();
     collabState();
-    collabcreditInfo();
-    // Clear cookies or any other storage if necessary
-    // Cookies.remove("auth_access");
-    // Cookies.remove("auth_refresh");
-    // Cookies.remove("collab_collabCreditState");
-    // Cookies.remove("collab_collabProjectState");  
+    collabcreditInfo(); 
 
 
 
     toast.success("Session Expired");
-    window.location.href = "/"; // Redirect to login page
+    window.location.href = "/"; 
   };
   const mytoken = useRecoilValue(attachToken);
   

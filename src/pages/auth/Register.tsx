@@ -7,7 +7,6 @@ import { LoaderCircle } from "lucide-react";
 import { userGoogleSignIn, userSignUp } from "../../utils/api/userFirebase";
 import { Dialog } from "primereact/dialog";
 import { FcGoogle } from "react-icons/fc";
-// import { TiVendorMicrosoft } from "react-icons/ti";
 import logo from '../../assets/logo/logo.png'
 import { toast } from "react-toastify";
 import { useSetRecoilState } from "recoil";
@@ -43,7 +42,6 @@ export default function Register() {
         name: values.displayName
       }
       await addSubscriber(payload)
-      // .then(()=>{})
     }
     
     await userSignUp(values.email, values.password, values.displayName).then((res) => {
@@ -56,7 +54,6 @@ export default function Register() {
     });
     values.password = "";
     values.password2 = "";
-    // Add your form submission logic here
   };
 
 
@@ -324,7 +321,6 @@ export default function Register() {
             <button
               type="submit"
               disabled={!isValid || isSubmitting}
-              // onClick={handleSubmit}
               className=" secondary-btn-red flex gap-3 justify-center"
             >
               {isSubmitting && isValid ? (

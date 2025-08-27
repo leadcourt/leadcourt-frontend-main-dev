@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Key, LoaderCircle, Lock, Mail } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-// import { FaLinkedinIn } from "react-icons/fa6";
 import { useFormik } from "formik";
 import { loginUserValidation } from "../../utils/validation/validation";
 import { Link, useNavigate } from "react-router-dom";
@@ -247,7 +246,6 @@ const LoginTwo = () => {
               <button
                 type="submit"
                 disabled={!isValid || isSubmitting}
-                // onClick={handleSubmit}
                 className=" secondary-btn-red flex gap-3 items-center justify-center"
               >
                 {isSubmitting && isValid ? (

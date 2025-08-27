@@ -12,14 +12,7 @@ interface userData {
   subscriptionType: string;
   amount: string;
 }
-
-// interface PaymentInIndiaData {
-//   location: string;
-//   display: boolean;
-//   amount: number;
-//   subscriptionType: string;
-// }
-
+ 
 const PaymentInIndia = ({ paymentData }: any) => {
   const user = useRecoilValue(userState);
 
@@ -63,11 +56,7 @@ const PaymentInIndia = ({ paymentData }: any) => {
         form.appendChild(codeInput);
         document.body.appendChild(form);
         form.submit();
-
-        //  postSabpaisaEncData(URL, sabpaisaPayload).then((sabRes) => {
-        //   console.log(sabRes.data);
-
-        // })
+ 
       } else {
         toast.error("Payment failed, please try again!");
         console.error("Payment failed", res.data);
@@ -90,10 +79,7 @@ const PaymentInIndia = ({ paymentData }: any) => {
     validationSchema: paymentInIndiaValidation,
     onSubmit,
   });
-
-  // useEffect(() => {
-  //   // console.log(paymentData?.subscriptionType);
-  // }, []);
+ 
   return (
     <div className=" mx-auto">
       <div className=" ">
@@ -135,7 +121,6 @@ const PaymentInIndia = ({ paymentData }: any) => {
                 <input
                   name="amount"
                   value={values.amount}
-                  // onChange={handleChange}
                   onBlur={handleBlur}
                   type="text"
                   disabled
@@ -279,7 +264,6 @@ const PaymentInIndia = ({ paymentData }: any) => {
             <button
               type="submit"
               disabled={!isValid || isSubmitting}
-              // onClick={handleSubmit}
               className={`secondary-btn-red2 ${
                 !isValid || isSubmitting ? "!bg-gray-400" : ""
               } flex gap-3 items-center justify-center`}

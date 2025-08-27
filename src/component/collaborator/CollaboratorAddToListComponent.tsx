@@ -34,10 +34,7 @@ function CollaboratorAddToListComponent({ people, onClose }: any) {
 
     await collaboration_getAllList_api(payload).then((res) => {
       setExistingList(res.data);
-    });
-    // .catch((err) => {
-    //   console.log("Error occurred: ", err);
-    // });
+    }); 
 
     setLoading(false);
   };

@@ -2,19 +2,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
-// import { TieredMenu } from "primereact/tieredmenu";
-// import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-// import { MultiSelect } from "primereact/multiselect";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   collabCreditState,
   collabProjectState,
 } from "../../utils/atom/collabAuthAtom";
-// import { userState } from "../../utils/atom/authAtom";
 import { toast } from "react-toastify";
-// import AddToListComponent from "../../component/AddToListComponent";
 import TextToCapitalize from "../../component/TextToCapital";
 import FilterComponent from "../../component/FilterComponent";
 import { Skeleton } from "primereact/skeleton";
@@ -30,7 +25,6 @@ import {
 } from "../../utils/api/collaborationData";
 import CollaboratorAddToListComponent from "../../component/collaborator/CollaboratorAddToListComponent";
 
-// import FilterComponent from "../../component/FilterComponent";
 
 interface Person {
   City: string;
@@ -49,20 +43,10 @@ interface LoadDataOptions {
   filter?: any;
 }
 
-// interface CollabProject {
-//   _id: string;
-//   ownerName: string;
-//   collaborator: string;
-//   collaboratorName: string;
-//   collaboratorEmail: string;
-//   permission: string;
-// }
 
 export default function Collab_DataTablePage() {
-  // const collabState = useRecoilValue(collabProjectState);
   const creditInfo = useSetRecoilState(collabCreditState);
   const creditInfoValue = useRecoilValue(collabCreditState);
-  // const [creditInfo, setCreditInfo] = useRecoilState(collabCreditState)
 
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [entries, setEntries] = useState([]);
@@ -146,7 +130,6 @@ export default function Collab_DataTablePage() {
 
   const debouncedFetchData = useRef(
     debounce(async (payload: any) => {
-      // console.log("inside debouncedFetchData", payload);
 
       try {
         const res = await collaboration_getAllData_api(payload);
@@ -207,7 +190,7 @@ export default function Collab_DataTablePage() {
 
         prevEntries = entries.map((entry: any) =>
           entry.row_id === id
-            ? { ...entry, ...res?.data.results[0] } // Update the Email field
+            ? { ...entry, ...res?.data.results[0] } 
             : entry
         );
         creditInfo({
@@ -348,7 +331,6 @@ export default function Collab_DataTablePage() {
     );
   };
 
-  // Get credit balance..
   const getCredit = async () => {
     await getCollabCreditBalance().then((res) => {
       creditInfo({
@@ -372,7 +354,6 @@ export default function Collab_DataTablePage() {
         header={`Insufficient Credits`}
         visible={visible}
         className="p-2 bg-white w-fit max-w-[400px] lg:w-1/2"
-        // style={{ maxWidth: "400px" }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -438,7 +419,6 @@ export default function Collab_DataTablePage() {
                 <Dialog
                   header="Add Profiles to list"
                   visible={modalVisible}
-                  // style={{ minWidth: "50vw" }}
                   className="p-2 bg-white w-[90vw] lg:w-1/2"
                   onHide={() => {
                     if (!modalVisible) return;
@@ -455,12 +435,10 @@ export default function Collab_DataTablePage() {
                 <Button
                   label="Add to list"
                   icon="pi pi-plus"
-                  // items={selectedUser}
                   onClick={() => addToList()}
                   className="flex gap-3 border border-gray-500 text-sm focus:outline-none text-gray-500 hover:bg-gray-500 hover:text-white  transition-colors duration-200 w-full lg:min-w-fit py-3 px-4 cursor-pointer font-medium rounded-md"
                 ></Button>
                 <div
-                  // onClick={() => navigate("/user/new")}
                   className="secondary-btn-red w-full lg:min-w-fit flex justify-center gap-5"
                 >
                   {/* <i className="pi pi-plus"></i> */}
@@ -480,7 +458,6 @@ export default function Collab_DataTablePage() {
                   dataKey="row_id"
                   scrollable 
                   scrollHeight="70vh" 
-                  // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}
                   selectionMode={rowClick ? null : "checkbox"}
@@ -504,7 +481,6 @@ export default function Collab_DataTablePage() {
                           ? "font-bold text-gray-700"
                           : "text-gray-500"
                       }  `}
-                      // body={col.field}
                       body={
                         col.field === "Phone"
                           ? skeletonLoad
@@ -530,7 +506,6 @@ export default function Collab_DataTablePage() {
                           ? skeletonLoad
                           : null
                       }
-                      // body={col.field === "Phone" ? showPhone : ''}
                       header={col.header}
                       headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                     />
@@ -546,7 +521,6 @@ export default function Collab_DataTablePage() {
                   emptyMessage={emptyMessageTemplate}
                   scrollable 
                   scrollHeight="70vh" 
-                  // paginator
                   className="text-sm rounded-lg overflow-hidden"
                   rows={50}
                   selectionMode={rowClick ? null : "checkbox"}
@@ -566,7 +540,6 @@ export default function Collab_DataTablePage() {
                       key={col.field}
                       field={col.field}
                       className={`text-xs py-3 border-b border-gray-100 text-gray-500 p-1 `}
-                      // body={col.field}
                       body={
                         col.field === "Phone"
                           ? showPhone
@@ -590,7 +563,6 @@ export default function Collab_DataTablePage() {
                           ? showOrgIndustry
                           : null
                       }
-                      // body={col.field === "Phone" ? showPhone : ''}
                       header={col.header}
                       headerClassName={"bg-[#F35114] text-white p-3 min-w-50"}
                     />
@@ -631,7 +603,6 @@ export default function Collab_DataTablePage() {
                   type="number"
                   value={pageNumber}
                   max={totalDataCount}
-                  // disabled
                   className="max-w-[100px] text-center order py-2 focus:outline-gray-100 focus:outline-1 rounded"
                   onChange={(e) => handleChangePageNumber(e)}
                 />

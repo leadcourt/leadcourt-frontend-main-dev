@@ -5,9 +5,6 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../utils/atom/authAtom';
 import { getPersonalInformation, setPersonalInformation } from '../../utils/api/settingsApi';
 import { toast } from 'react-toastify';
-// interface ProfileImageProps {
-//   imageUrl?: string;
-// }
 
   const ProfileImage = ({ imageUrl }:any) => {
   return (
@@ -114,10 +111,8 @@ const PersonalInformationPage: React.FC = () => {
     await setPersonalInformation(payload).then(()=> {
       toast.success('Information updated successfully')
       
-    }).catch(( )=> {
-      // console.error("error occured", err);
-      
     })
+     
 
     setSubmitLoading(false)
 
@@ -136,7 +131,7 @@ const PersonalInformationPage: React.FC = () => {
     await getPersonalInformation(payload.id).then((res)=>{
       
       setUserData({
-        profileImage: '/api/placeholder/80/80', // Placeholder image
+        profileImage: '/api/placeholder/80/80',
         FullName: res.full_name ?? user?.email,
         email: user?.email ,
         phone: res?.phone_number ?? ''
@@ -150,10 +145,6 @@ const PersonalInformationPage: React.FC = () => {
         'Phone number': res?.phone_number ?? ''
       })
 
-     
-
-    // }).catch((err)=>{
-      
     })
   }
 

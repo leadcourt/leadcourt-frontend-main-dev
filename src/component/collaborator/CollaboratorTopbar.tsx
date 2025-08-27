@@ -1,6 +1,3 @@
-import { useEffect } from "react"; 
-// import fileicon from "../assets/icons/fileicon.png"; 
-// import star from "../assets/icons/star.png";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,10 +11,6 @@ import logo from '../../assets/logo/logo.png'
 
 
 export default function CollaboratorTopbar() {
-  // const [user, setUser] = useRecoilState(userState)
-  // const [auth, setAuth] = useRecoilState(authState)
-  // const [path, setPath] = useState("");
-  // const [auth, setAuth] = 
   const credit = useRecoilValue(collabCreditState)
   const collabState = useRecoilValue(collabProjectState)
     
@@ -40,11 +33,7 @@ export default function CollaboratorTopbar() {
     toast.success("Log out successful");
     navigate("/");
   };
-
-  useEffect(() => {
-    // setPath(breadcrumbs());
-  });
-
+ 
   return (
     <div className="h-[10vh]  w-full bg-white">
       <div className="h-full  flex justify-between items-center px-5 ">

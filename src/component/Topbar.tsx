@@ -1,6 +1,3 @@
-import { useEffect } from "react"; 
-// import fileicon from "../assets/icons/fileicon.png"; 
-// import star from "../assets/icons/star.png";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import {
@@ -15,12 +12,7 @@ import { collabCreditState, collabProjectState } from "../utils/atom/collabAuthA
 
 
 export default function Topbar() {
-  // const [user, setUser] = useRecoilState(userState)
-  // const [auth, setAuth] = useRecoilState(authState)
-  // const [path, setPath] = useState("");
-  // const [auth, setAuth] = 
   const credit = useRecoilValue(creditState)
-
   const resetAccessToken = useResetRecoilState(accessTokenState);
   const resetRefreshToken = useResetRecoilState(refreshTokenState);
   const resetUser = useResetRecoilState(userState);
@@ -44,15 +36,11 @@ export default function Topbar() {
     navigate("/");
   };
 
-  useEffect(() => {
-    // setPath(breadcrumbs());
-  });
 
   return (
     <div className="h-[10vh]  w-full bg-white">
       <div className="h-full  flex justify-between items-center px-5 ">
         <div onClick={()=>navigate('/')} className="lg:hidden cursor-pointer">
-          {/* <img src={LogoBlk} alt="" />  */}
           <img src={logo} alt="" className="h-8" />
 
         </div>
